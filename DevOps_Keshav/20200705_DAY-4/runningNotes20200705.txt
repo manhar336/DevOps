@@ -1,0 +1,46 @@
+DAY-4 :https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200705_DAY-4/zoom_0.mp4
+
+Agenda :
+
+1. Create Java Project 
+
+2. Provision Continuous Integration Server i.e. Jenkins : On Local Machine and on AWS CLOUD 
+
+Utility Softwares : vim, curl, elinks, unzip, wget, tree, git 
+
+Java 1.8 
+
+Maven 3.5.4
+
+Jenkins repo 
+
+Jenkins 
+https://www.jenkins.io/doc/book/installing/#debianubuntu
+
+3. Download, Install & Configure :
+    - Java 1.8 
+    - Maven 
+
+4. Execute the Build Manually 
+
+Maven Build Phases
+Maven build lifecycle goes through a set of stages, they are called build phases. For example, the default lifecycle is made up of the following phases.
+
+1. validate
+2. compile
+3. test
+4. package
+5. verify
+6. install
+7. deploy
+
+# mvn clean package deploy 
+(Clean, Validate, Compile, Test, Install, Verify and Package(.jar or .war) & 
+deploy(Artifactory i.e. Nexus/Jfrog/S3 bucket etc...))
+
+5. Will integrate the Build with Jenkins 
+
+6. Integration with GitLab/Github 
+
+
+

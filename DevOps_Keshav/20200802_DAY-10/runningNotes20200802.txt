@@ -1,0 +1,211 @@
+DAY-10 : https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200802_DAY-10/zoom_0.mp4
+
+Agenda :
+
+10. Docker – Containerisation Platform :
+    - Jenkins
+    - SonarQube
+    - Jfrog
+    - Tomcat
+    - Nagiosxi  
+
+11. Kubernetes – Container Orchestration tool
+
+12. Ansible – Configuration Management and Deployment
+
+13. Nagios – Continuous Monitoring :
+https://assets.nagios.com/downloads/nagiosxi/docs/Installing-Nagios-XI-Manually-on-Linux.pdf
+
+- 
+Jenkins Pipeline Jobs [ Pending ]
+
+Ansible – Configuration Management and Deployment
+
+- Agentless Software
+- Python
+- Master and Slave Configuration 
+- Playbooks
+- Modules 
+- Push Based Configuration Management Tool 
+- SSH 
+
+SaltStack :
+- Python 
+- Push Based Configuration Management Tool 
+
+
+Pull Based Configuration Management Tools:
+- Chef
+- Puppet 
+
+- Ruby DSLR 
+- Agent Software 
+
+sudo apt update
+sudo apt install software-properties-common -y 
+sudo apt-add-repository --yes --update ppa:ansible/ansible -y 
+sudo apt install ansible -y 
+
+
+
+172.31.11.229 ansible-master.codewithkesav.com
+172.31.8.196 ansible-node1.codewithkesav.com
+172.31.7.137 ansible-node2.codewithkesav.com
+
+
+
+ubuntu@ansible-master:~$ vi webserver-apache2.yml
+ubuntu@ansible-master:~$ 
+ubuntu@ansible-master:~$ ls -lrt
+total 8
+-rw-rw-r-- 1 ubuntu ubuntu 156 Aug  2 03:18 ansible-install.sh
+-rw-rw-r-- 1 ubuntu ubuntu 363 Aug  2 03:55 webserver-apache2.yml
+ubuntu@ansible-master:~$ cat webserver-apache2.yml 
+---
+- name: play-1
+  hosts: web
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  tasks:
+          - name: Install WebServer i.e. Apache2
+            apt:
+                    name: apache2
+                    state: present
+
+          - name: Start the WebServer
+            service:
+                    name: apache2
+                    state: started
+ubuntu@ansible-master:~$ ansible-playbook webserver-apache2.yml --check
+
+PLAY [play-1] ********************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************
+ok: [18.191.116.72]
+
+TASK [Install WebServer i.e. Apache2] ********************************************************************************************
+changed: [18.191.116.72]
+
+TASK [Start the WebServer] *******************************************************************************************************
+changed: [18.191.116.72]
+
+PLAY RECAP ***********************************************************************************************************************
+18.191.116.72              : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ubuntu@ansible-master:~$ ansible-playbook webserver-apache2.yml --syntax-check
+
+playbook: webserver-apache2.yml
+ubuntu@ansible-master:~$ 
+ubuntu@ansible-master:~$ ansible-playbook webserver-apache2.yml
+
+PLAY [play-1] ********************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************
+ok: [18.191.116.72]
+
+TASK [Install WebServer i.e. Apache2] ********************************************************************************************
+changed: [18.191.116.72]
+
+TASK [Start the WebServer] *******************************************************************************************************
+ok: [18.191.116.72]
+
+PLAY RECAP ***********************************************************************************************************************
+18.191.116.72              : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ubuntu@ansible-master:~$ 
+ubuntu@ansible-master:~$ 
+
+
+ubuntu@ansible-master:~$ cat tomcat.service 
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=network.target
+
+[Service]
+Type=forking
+
+Environment=JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
+Environment=CATALINA_HOME=/opt/tomcat
+Environment=CATALINA_BASE=/opt/tomcat
+Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+ExecStart=/opt/tomcat/bin/startup.sh
+ExecStop=/opt/tomcat/bin/shutdown.sh
+
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+ubuntu@ansible-master:~$ cat myplay.yml 
+---
+- hosts: app
+
+  become: yes
+  become_method: sudo
+  remote_user: ubuntu
+
+  tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+
+  - name: install JDK 11
+    apt:
+      name: openjdk-11-jdk
+      state: present
+
+  - name: add tomcat group
+    group:
+      name: tomcat
+
+  - name: add tomcat user
+    user:
+      name: tomcat
+      group: tomcat
+      home: /user/share/tomcat
+      createhome: no
+
+  - name: create /opt/tomcat directory
+    file:
+      path: /opt/tomcat
+      state: directory
+      mode: 0755
+
+  - name: download & unarchive
+    unarchive:
+      src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.37/bin/apache-tomcat-9.0.37.tar.gz
+      dest: /opt/tomcat
+      remote_src: yes
+      extra_opts: [--strip-components=1]
+
+  - name: Change ownership
+    file:
+      path: /opt/tomcat
+      owner: tomcat
+      group: tomcat
+      mode: "u+rwx,g+rx,o=rx"
+      recurse: yes
+      state: directory
+
+  - name: Copy Tomcat service from local to remote
+    copy:
+       src: tomcat.service
+       dest: /etc/systemd/system/
+       mode: 0755
+
+  - name: Start and enable Tomcat service
+    systemd:
+      name: tomcat
+      state: started
+      enabled: true
+      daemon_reload: true
+ubuntu@ansible-master:~$ 
+

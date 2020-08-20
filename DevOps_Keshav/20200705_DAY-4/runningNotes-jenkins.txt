@@ -1,0 +1,104 @@
+Last login: Sun Jul  5 07:46:39 on ttys002
+Clouds-MacBook-Pro:~ cloudbinary$ pwd
+/Users/cloudbinary
+Clouds-MacBook-Pro:~ cloudbinary$ git --version
+git version 2.26.2
+Clouds-MacBook-Pro:~ cloudbinary$ ssh cloudbinary@192.168.0.5
+The authenticity of host '192.168.0.5 (192.168.0.5)' can't be established.
+ECDSA key fingerprint is SHA256:JKOVCT5NjfjZHmttNusZQDj+g8mklAdgjvML4okheR4.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.168.0.5' (ECDSA) to the list of known hosts.
+cloudbinary@192.168.0.5's password: 
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 4.15.0-109-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ System information disabled due to load higher than 1.0
+
+ * "If you've been waiting for the perfect Kubernetes dev solution for
+   macOS, the wait is over. Learn how to install Microk8s on macOS."
+
+   https://www.techrepublic.com/article/how-to-install-microk8s-on-macos/
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+40 packages can be updated.
+0 updates are security updates.
+
+
+Last login: Sat Jul  4 03:28:10 2020 from 192.168.0.6
+cloudbinary@continuousintegration:~$ hostname
+continuousintegration
+cloudbinary@continuousintegration:~$ sudo su
+[sudo] password for cloudbinary: 
+root@continuousintegration:/home/cloudbinary# cd
+root@continuousintegration:~# 
+root@continuousintegration:~# 
+root@continuousintegration:~# hostname
+continuousintegration
+root@continuousintegration:~# 
+root@continuousintegration:~# hostnamectl set-hostname "jenkins.codewithkesav.com"
+root@continuousintegration:~# /bin/bash
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# hosntame
+
+
+^C
+root@jenkins:~# hostname
+jenkins.codewithkesav.com
+root@jenkins:~# 
+root@jenkins:~# hostname -I
+192.168.0.5 
+root@jenkins:~# cat /etc/hosts
+127.0.0.1 localhost
+127.0.1.1 continuousintegration
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+root@jenkins:~# 
+root@jenkins:~# # 192.168.0.5 jenkins.codewithkesav.com
+root@jenkins:~# 
+root@jenkins:~# vi /etc/hosts
+root@jenkins:~# 
+root@jenkins:~# 
+
+
+root@jenkins:~# tree --version
+tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro 
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# git --version
+git version 2.17.1
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# echo $JAVA_HOME >> /tmp/test.txt
+root@jenkins:~# 
+root@jenkins:~# ls -lrt /tmp/test.txt 
+-rw-r--r-- 1 root root 35 Jul  5 04:00 /tmp/test.txt
+root@jenkins:~# 
+root@jenkins:~# cat /tmp/test.txt 
+/usr/lib/jvm/java-8-openjdk-amd64/
+root@jenkins:~# 
+root@jenkins:~# 
+root@jenkins:~# echo "`git --version`" >> /tmp/test.txt 
+root@jenkins:~# 
+root@jenkins:~# cat /tmp/test.txt 
+/usr/lib/jvm/java-8-openjdk-amd64/
+git version 2.17.1
+root@jenkins:~# 
+root@jenkins:~# echo "`git --version`" > /tmp/test.txt 
+root@jenkins:~# 
+root@jenkins:~# cat /tmp/test.txt 
+git version 2.17.1

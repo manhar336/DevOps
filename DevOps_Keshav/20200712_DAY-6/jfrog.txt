@@ -1,0 +1,21 @@
+Jfrog :
+
+https://www.jfrog.com/confluence/display/JFROG/Installing+Artifactory#InstallingArtifactory-HAInstallation
+
+
+System Requirements :
+
+CPU : 4 Core 
+RAM : 4 GB
+HDD : 20GB + 
+
+Dependency : 
+
+Java 1.8 
+
+Set the JFrog Home environment variable
+
+export JFROG_HOME=<full path of the jfrog directory>
+
+https://api.bintray.com/content/jfrog/artifactory/org/artifactory/oss/jfrog-artifactory-oss/$latest/jfrog-artifactory-oss-$latest-linux.tar.gz?bt_package=jfrog-artifactory-oss
+

@@ -1,0 +1,25 @@
+DAY-11 : https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200809_DAY-11/zoom_0.mp4
+
+Agenda :
+
+Jenkins Pipeline Jobs [ Pending ]
+
+Kubernetes – Container Orchestration tool
+
+mvn sonar:sonar \
+  -Dsonar.projectKey=devworld \
+  -Dsonar.host.url=http://18.224.182.98:9000 \
+  -Dsonar.login=4a3dc9dedabe9121c190fe4a39cf5e107e7e7ec7
+
+
+Maven LifeCycles:
+
+  clean validate compile test install verify package deploy
+
+
+Kubernetes – Container Orchestration tool
+
+- https://www.cncf.io/certification/cka/
+
+- https://www.cncf.io/certification/ckad/
+

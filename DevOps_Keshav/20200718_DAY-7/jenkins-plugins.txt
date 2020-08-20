@@ -1,0 +1,20 @@
+#------------- Install & Configure Jenkins Plugins on Ubuntu -----------#
+
+Go to Jenkins >> Manage Jenkins >> Global Tool Configuration >> Java & MAVEN
+# echo $JAVA_HOME
+/usr/lib/jvm/java-8-oracle
+
+# echo $MAVEN_HOME
+/usr/share/maven/
+
+Go to Jenkins >> Manage Jenkins >> Manage Plugins >> Under Available add below mentioned plugins:
+
+Jenkins Plugins :
+1. Conditional Buildstep
+2. Deploy to container 
+3. Environment Injector
+4. Git Parameter 
+5. GitHub Branch Source & GitLab Branch Source
+6. Maven Integration
+7. Maven Invoker
+8. Publish Over SSH

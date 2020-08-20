@@ -1,0 +1,36 @@
+DAY-3 : https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200704_DAY-3/zoom_0.mp4
+
+Agenda :
+
+1. Download, Install and Configure of Linux OS i.e. Distributions i.e. Ubuntu & CentOS
+
+https://releases.ubuntu.com/18.04/
+http://centos.excellmedia.net/7.8.2003/isos/x86_64/
+
+2. System Admin & Network Admin Concepts :
+    - Basic Commands 
+    - Advanced Commands 
+    - CLI Editors 
+    - Package management
+    - Process management
+    - User Mgmt 
+    - Group Mgmt 
+    - IPV4
+    - Webserver i.e. Windows - IIS or Linux (Ubuntu - apache2) & (CentOS - httpd)
+
+3. Continuous Integration Server : Jenkins 
+
+4. Maven 
+
+5. Create Java Project 
+
+
+https://www.realvnc.com/en/connect/download/viewer/
+
+https://github.com/keshavkummari/codewithckk
+
+https://github.com/keshavkummari/keshavkummari
+
+
+https://www.google.com/search?rlz=1C5CHFA_enIN899IN899&sxsrf=ALeKk02Q1KAeQG5WHyWtpLscudSoHrzhvg%3A1593835888644&ei=cAEAX_36Jqfjz7sP9L6_uAk&q=application+servers+list&oq=application+servers+list&gs_lcp=CgZwc3ktYWIQAzICCAAyBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeOgQIABBHOgQIABBDOgcIABAUEIcCOgQIABAKOgYIABAKEEM6CAgAEBYQChAeUN-MAVjMkwFgrJYBaABwAXgAgAFtiAHxA5IBAzMuMpgBAKABAaoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwj98uOv3bLqAhWn8XMBHXTfD5cQ4dUDCAw&uact=5
+

@@ -1,0 +1,18 @@
+DAY-6 : https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200712_DAY-6/zoom_0.mp4
+
+Agenda :
+
+CI : Continuous Integration 
+
+Continuous Testing :
+    - Unit Testing : Junit
+    - Static Code Analysis : SonarQube
+
+Continuous Binary Code Repository : Jfrog 
+
+Application Server : Apache Tomcat 
+
+Provision :
+    - Virtualization   : Oracle VirtualBox 
+    - Containerization : Docker 
+    - Cloud Computing  : AWS ---> Compute ---> EC2 ---> Instances  

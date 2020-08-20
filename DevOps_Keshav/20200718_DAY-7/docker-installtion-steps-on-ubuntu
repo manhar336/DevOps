@@ -1,0 +1,72 @@
+# Update ubnutu updates 
+1. apt-get install update 
+2. sudo apt install docker.io
+3. root@jenkins:~# docker -v
+   Docker version 19.03.6, build 369ce74a3c
+   root@jenkins:~# 
+    manohard@jenkins:~$ docker images
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.40/images/json: dial unix /var/run/docker.sock: connect: permission denied
+manohard@jenkins:~$ 
+
+4. Need to add user in docker group 
+   manohard@jenkins:~$ grep manohard /etc/passwd /etc/shadow   #user administration files
+    /etc/passwd:manohard:x:1000:1000:manohardharmala:/home/manohard:/bin/bash
+    grep: /etc/shadow: Permission denied
+    grep docker /etc/group /etc/gshadow        #group administration files
+    /etc/group:docker:x:131:
+    grep: /etc/gshadow: Permission denied
+    manohard@jenkins:~$ 
+5. adding manohard user in docker group
+    manohard@jenkins:~$ sudo usermod -aG docker manohard
+    [sudo] password for manohard: 
+    manohard@jenkins:~$
+    manohard@jenkins:~$ sudo grep docker /etc/group /etc/gshadow
+    /etc/group:docker:x:131:manohard
+    /etc/gshadow:docker:!::manohard
+     manohard@jenkins:~$  
+6. Docker home directory
+    manohard@jenkins:~$ ls -ltr /var/run/docker.sock 
+    srw-rw---- 1 root docker 0 Aug 11 16:33 /var/run/docker.sock
+    manohard@jenkins:~$ 
+7. Givining permission to non root user to do some activities 
+    manohard@jenkins:~$ sudo chmod 666 /var/run/docker.sock 
+    manohard@jenkins:~$ docker images
+    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+    manohard@jenkins:~$ 
+8. Restart and enable services in boot level
+    manohard@jenkins:~$ sudo systemctl enable  docker.service
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+manohard@jenkins:~$ sudo systemctl restart  docker.service
+manohard@jenkins:~$ sudo systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2020-08-11 16:57:12 UTC; 2s ago
+     Docs: https://docs.docker.com
+ Main PID: 13154 (dockerd)
+    Tasks: 8
+   CGroup: /system.slice/docker.service
+           └─13154 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Aug 11 16:57:11 jenkins.com dockerd[13154]: time="2020-08-11T16:57:11.987079311Z" level=warning msg="Your kernel does not support swap memory limit"
+Aug 11 16:57:11 jenkins.com dockerd[13154]: time="2020-08-11T16:57:11.987314916Z" level=warning msg="Your kernel does not support cgroup rt period"
+Aug 11 16:57:11 jenkins.com dockerd[13154]: time="2020-08-11T16:57:11.987449977Z" level=warning msg="Your kernel does not support cgroup rt runtime"
+Aug 11 16:57:12 jenkins.com dockerd[13154]: time="2020-08-11T16:57:11.988551432Z" level=info msg="Loading containers: start."
+Aug 11 16:57:12 jenkins.com dockerd[13154]: time="2020-08-11T16:57:12.130762237Z" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a preferred IP address"
+Aug 11 16:57:12 jenkins.com dockerd[13154]: time="2020-08-11T16:57:12.155174424Z" level=info msg="Loading containers: done."
+Aug 11 16:57:12 jenkins.com dockerd[13154]: time="2020-08-11T16:57:12.278612919Z" level=info msg="Docker daemon" commit=369ce74a3c graphdriver(s)=overlay2 version=19.03.6
+Aug 11 16:57:12 jenkins.com dockerd[13154]: time="2020-08-11T16:57:12.288409393Z" level=info msg="Daemon has completed initialization"
+Aug 11 16:57:12 jenkins.com systemd[1]: Started Docker Application Container Engine.
+Aug 11 16:57:12 jenkins.com dockerd[13154]: time="2020-08-11T16:57:12.326622137Z" level=info msg="API listen on /var/run/docker.sock"
+manohard@jenkins:~$ 
+
+7. Check current running containers status
+  manohard@jenkins:~$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+manohard@jenkins:~$ 
+
+8. check currently running and previously running containers status
+   manohard@jenkins:~$ docker ps -a
+   CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+   manohard@jenkins:~$ 
+   
+

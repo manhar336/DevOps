@@ -1,0 +1,29 @@
+FOLLOWING ARE SOME OF THE FAMOUS DEVOPS CI/CD PIPELINE TOOLS:
+
+1. SDLC - Agile Scrum Framework
+
+2. Microsoft Teams/Slack/CISCO Spark - Continuous Communication  
+
+3. Jira/Trello/VSTS - Continuous Collaboration
+
+4. Git and GitHub/GitLab/AWS CodeCommit/BitBucket – Source code management (Version Control System) {Setup own Gitlab System}
+
+5. Jenkins – Continuous integration
+
+6. Maven - Continuous Build Tool
+
+7. Junit - Continuous Unit Testing
+
+8. SonarQube - Continuous Code Quality
+
+9. Jfrog/Nexus - Continuous Binary Code Repository
+
+10. Docker – Containerisation Platform
+
+11. Kubernetes – Container Orchestration tool
+
+12. Ansible – Configuration Management and Deployment
+
+13. Nagios / NewRelic / ELK / Splunk – Continuous Monitoring
+
+On AWS Cloud 

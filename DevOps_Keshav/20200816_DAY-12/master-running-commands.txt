@@ -1,0 +1,1675 @@
+Last login: Sun Aug 16 07:58:08 on console
+cloudbinary@Clouds-MacBook-Pro ~ % pwd
+/Users/cloudbinary
+cloudbinary@Clouds-MacBook-Pro ~ % cd Downloads 
+cloudbinary@Clouds-MacBook-Pro Downloads % ssh -i "tm_aws_ohio_keys.pem" ubuntu@ec2-3-16-107-117.us-east-2.compute.amazonaws.com
+The authenticity of host 'ec2-3-16-107-117.us-east-2.compute.amazonaws.com (3.16.107.117)' can't be established.
+ECDSA key fingerprint is SHA256:xgvD+4W8nBq9TOmzZEGsiCll/DXqS4DrFsmdaO4jVbU.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-3-16-107-117.us-east-2.compute.amazonaws.com,3.16.107.117' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 5.3.0-1032-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun Aug 16 02:48:55 UTC 2020
+
+  System load:  0.01              Processes:           115
+  Usage of /:   3.8% of 29.02GB   Users logged in:     0
+  Memory usage: 4%                IP address for eth0: 172.31.35.77
+  Swap usage:   0%
+
+0 packages can be updated.
+0 updates are security updates.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-35-77:~$ sudo hostnamectl set-hostname "master.codewithkesav.com"
+ubuntu@ip-172-31-35-77:~$ /bin/bash
+ubuntu@master:~$ hostname
+master.codewithkesav.com
+ubuntu@master:~$ hostname -I
+172.31.35.77 
+ubuntu@master:~$ cat /etc/hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+ubuntu@master:~$ sudo vi /etc/hosts
+ubuntu@master:~$ 
+ubuntu@master:~$ cat /etc/hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+# Kubernetes Master
+172.31.35.77 master.codewithkesav.com
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ pwd
+/home/ubuntu
+ubuntu@master:~$ sudo apt-get update 
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Get:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+Get:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]
+Get:4 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 Packages [8570 kB]          
+Get:5 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe Translation-en [4941 kB]                    
+Get:6 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]                                     
+Get:7 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/multiverse amd64 Packages [151 kB]                              
+Get:8 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/multiverse Translation-en [108 kB]                        
+Get:9 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 Packages [1034 kB]                           
+Get:10 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/main Translation-en [347 kB]                     
+Get:11 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 Packages [1097 kB]                       
+Get:12 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe Translation-en [342 kB]                  
+Get:13 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/multiverse amd64 Packages [19.2 kB]                     
+Get:14 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/multiverse Translation-en [6712 B]            
+Get:15 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/main amd64 Packages [7516 B]                     
+Get:16 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/main Translation-en [4764 B]
+Get:17 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/universe amd64 Packages [7736 B]
+Get:18 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports/universe Translation-en [4588 B]
+Get:19 http://security.ubuntu.com/ubuntu bionic-security/main amd64 Packages [809 kB]
+Get:20 http://security.ubuntu.com/ubuntu bionic-security/main Translation-en [254 kB]
+Get:21 http://security.ubuntu.com/ubuntu bionic-security/universe amd64 Packages [691 kB]
+Get:22 http://security.ubuntu.com/ubuntu bionic-security/universe Translation-en [229 kB]
+Get:23 http://security.ubuntu.com/ubuntu bionic-security/multiverse amd64 Packages [8100 B]
+Get:24 http://security.ubuntu.com/ubuntu bionic-security/multiverse Translation-en [2852 B]
+Fetched 18.9 MB in 3s (5468 kB/s)                           
+Reading package lists... Done
+ubuntu@master:~$ sudo apt-get install vim curl unzip wget git apt-transport-https -y 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+curl is already the newest version (7.58.0-2ubuntu3.9).
+curl set to manually installed.
+git is already the newest version (1:2.17.1-1ubuntu0.7).
+git set to manually installed.
+vim is already the newest version (2:8.0.1453-1ubuntu1.3).
+vim set to manually installed.
+wget is already the newest version (1.19.4-1ubuntu2.2).
+wget set to manually installed.
+Suggested packages:
+  zip
+The following NEW packages will be installed:
+  apt-transport-https unzip
+0 upgraded, 2 newly installed, 0 to remove and 2 not upgraded.
+Need to get 169 kB of archives.
+After this operation, 711 kB of additional disk space will be used.
+Get:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 apt-transport-https all 1.6.12ubuntu0.1 [1692 B]
+Get:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 unzip amd64 6.0-21ubuntu1 [167 kB]
+Fetched 169 kB in 0s (9848 kB/s)
+Selecting previously unselected package apt-transport-https.
+(Reading database ... 57084 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_1.6.12ubuntu0.1_all.deb ...
+Unpacking apt-transport-https (1.6.12ubuntu0.1) ...
+Selecting previously unselected package unzip.
+Preparing to unpack .../unzip_6.0-21ubuntu1_amd64.deb ...
+Unpacking unzip (6.0-21ubuntu1) ...
+Setting up apt-transport-https (1.6.12ubuntu0.1) ...
+Setting up unzip (6.0-21ubuntu1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+ubuntu@master:~$ sudo apt-get update 
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu bionic-security InRelease              
+Reading package lists... Done                                                  
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo apt-get install docker.io -y
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  bridge-utils cgroupfs-mount containerd pigz runc ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools debootstrap docker-doc rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils cgroupfs-mount containerd docker.io pigz runc ubuntu-fan
+0 upgraded, 7 newly installed, 0 to remove and 2 not upgraded.
+Need to get 63.8 MB of archives.
+After this operation, 319 MB of additional disk space will be used.
+Get:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 pigz amd64 2.4-1 [57.4 kB]
+Get:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 bridge-utils amd64 1.5-15ubuntu1 [30.1 kB]
+Get:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 cgroupfs-mount all 1.4 [6320 B]
+Get:4 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 runc amd64 1.0.0~rc10-0ubuntu1~18.04.2 [2000 kB]
+Get:5 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 containerd amd64 1.3.3-0ubuntu1~18.04.2 [21.7 MB]
+Get:6 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 docker.io amd64 19.03.6-0ubuntu1~18.04.1 [39.9 MB]
+Get:7 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 ubuntu-fan all 0.12.10 [34.7 kB]
+Fetched 63.8 MB in 1s (51.4 MB/s)     
+Preconfiguring packages ...
+Selecting previously unselected package pigz.
+(Reading database ... 57106 files and directories currently installed.)
+Preparing to unpack .../0-pigz_2.4-1_amd64.deb ...
+Unpacking pigz (2.4-1) ...
+Selecting previously unselected package bridge-utils.
+Preparing to unpack .../1-bridge-utils_1.5-15ubuntu1_amd64.deb ...
+Unpacking bridge-utils (1.5-15ubuntu1) ...
+Selecting previously unselected package cgroupfs-mount.
+Preparing to unpack .../2-cgroupfs-mount_1.4_all.deb ...
+Unpacking cgroupfs-mount (1.4) ...
+Selecting previously unselected package runc.
+Preparing to unpack .../3-runc_1.0.0~rc10-0ubuntu1~18.04.2_amd64.deb ...
+Unpacking runc (1.0.0~rc10-0ubuntu1~18.04.2) ...
+Selecting previously unselected package containerd.
+Preparing to unpack .../4-containerd_1.3.3-0ubuntu1~18.04.2_amd64.deb ...
+Unpacking containerd (1.3.3-0ubuntu1~18.04.2) ...
+Selecting previously unselected package docker.io.
+Preparing to unpack .../5-docker.io_19.03.6-0ubuntu1~18.04.1_amd64.deb ...
+Unpacking docker.io (19.03.6-0ubuntu1~18.04.1) ...
+Selecting previously unselected package ubuntu-fan.
+Preparing to unpack .../6-ubuntu-fan_0.12.10_all.deb ...
+Unpacking ubuntu-fan (0.12.10) ...
+Setting up runc (1.0.0~rc10-0ubuntu1~18.04.2) ...
+Setting up cgroupfs-mount (1.4) ...
+Setting up containerd (1.3.3-0ubuntu1~18.04.2) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up bridge-utils (1.5-15ubuntu1) ...
+Setting up ubuntu-fan (0.12.10) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/ubuntu-fan.service → /lib/systemd/system/ubuntu-fan.service.
+Setting up pigz (2.4-1) ...
+Setting up docker.io (19.03.6-0ubuntu1~18.04.1) ...
+Adding group `docker' (GID 115) ...
+Done.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+docker.service is a disabled or a static unit, not starting it.
+Processing triggers for systemd (237-3ubuntu10.42) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for ureadahead (0.100.0-21) ...
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ grep 'docker' /etc/passwd /etc/shadow /etc/group /etc/gshadow
+grep: /etc/shadow: Permission denied
+/etc/group:docker:x:115:
+grep: /etc/gshadow: Permission denied
+ubuntu@master:~$ 
+ubuntu@master:~$ # sudo usermod -aG docker ubuntu
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo grep 'docker' /etc/passwd /etc/shadow /etc/group /etc/gshadow
+/etc/group:docker:x:115:
+/etc/gshadow:docker:!::
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.40/images/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo usermod -aG docker ubuntu
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo grep 'docker' /etc/passwd /etc/shadow /etc/group /etc/gshadow
+/etc/group:docker:x:115:ubuntu
+/etc/gshadow:docker:!::ubuntu
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo chmod 666 /var/run/docker.sock 
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrt /var/run/docker.sock 
+srw-rw-rw- 1 root docker 0 Aug 16 02:52 /var/run/docker.sock
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; disabled; vendor preset: enabled)
+   Active: inactive (dead)
+     Docs: https://docs.docker.com
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo systemctl enable docker.service
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+ubuntu@master:~$ sudo systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: inactive (dead)
+     Docs: https://docs.docker.com
+ubuntu@master:~$ sudo systemctl restart docker.service
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2020-08-16 02:54:42 UTC; 3s ago
+     Docs: https://docs.docker.com
+ Main PID: 4352 (dockerd)
+    Tasks: 10
+   CGroup: /system.slice/docker.service
+           └─4352 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.021227733Z" level=warning msg="Your kernel does not support c
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.021236062Z" level=warning msg="Your kernel does not support c
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.021243693Z" level=warning msg="Your kernel does not support c
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.021704016Z" level=info msg="Loading containers: start."
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.140355718Z" level=info msg="Default bridge (docker0) is assig
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.191996118Z" level=info msg="Loading containers: done."
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.217415573Z" level=info msg="Docker daemon" commit=369ce74a3c 
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.217531648Z" level=info msg="Daemon has completed initializati
+Aug 16 02:54:42 master.codewithkesav.com systemd[1]: Started Docker Application Container Engine.
+Aug 16 02:54:42 master.codewithkesav.com dockerd[4352]: time="2020-08-16T02:54:42.247100486Z" level=info msg="API listen on /var/run/docker.soc
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.40/images/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.40/images/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo usermod -aG docker ubuntu
+ubuntu@master:~$ sudo chmod 666 /var/run/docker.sock 
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo systemctl restart docker.service
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2020-08-16 02:55:47 UTC; 6s ago
+     Docs: https://docs.docker.com
+ Main PID: 4559 (dockerd)
+    Tasks: 11
+   CGroup: /system.slice/docker.service
+           └─4559 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.002068369Z" level=warning msg="Your kernel does not support c
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.002076334Z" level=warning msg="Your kernel does not support c
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.002087306Z" level=warning msg="Your kernel does not support c
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.002228899Z" level=info msg="Loading containers: start."
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.085096320Z" level=info msg="Default bridge (docker0) is assig
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.117102531Z" level=info msg="Loading containers: done."
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.137181993Z" level=info msg="Docker daemon" commit=369ce74a3c 
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.137246136Z" level=info msg="Daemon has completed initializati
+Aug 16 02:55:47 master.codewithkesav.com dockerd[4559]: time="2020-08-16T02:55:47.150801221Z" level=info msg="API listen on /var/run/docker.soc
+Aug 16 02:55:47 master.codewithkesav.com systemd[1]: Started Docker Application Container Engine.
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get http://%2Fvar%2Frun%2Fdocker.sock/v1.40/images/json: dial unix /var/run/docker.sock: connect: permission denied
+ubuntu@master:~$ sudo apt-get update
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu bionic-security InRelease                
+Reading package lists... Done                      
+ubuntu@master:~$ sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+OK
+ubuntu@master:~$ cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+> deb https://apt.kubernetes.io/ kubernetes-xenial main
+> EOF
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+ubuntu@master:~$ sudo apt-get update 
+Hit:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu bionic-security InRelease                    
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial InRelease [8993 B]     
+Get:6 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 Packages [39.4 kB]
+Fetched 48.4 kB in 1s (71.8 kB/s)
+Reading package lists... Done
+ubuntu@master:~$ sudo apt-get install -y kubelet kubeadm kubectl
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following additional packages will be installed:
+  conntrack cri-tools kubernetes-cni socat
+The following NEW packages will be installed:
+  conntrack cri-tools kubeadm kubectl kubelet kubernetes-cni socat
+0 upgraded, 7 newly installed, 0 to remove and 2 not upgraded.
+Need to get 70.6 MB of archives.
+After this operation, 297 MB of additional disk space will be used.
+Get:1 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 conntrack amd64 1:1.4.4+snapshot20161117-6ubuntu2 [30.6 kB]
+Get:2 http://us-east-2.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 socat amd64 1.7.3.2-2ubuntu2 [342 kB]
+Get:3 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 cri-tools amd64 1.13.0-01 [8775 kB]
+Get:4 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubernetes-cni amd64 0.8.6-00 [25.0 MB]
+Get:5 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubelet amd64 1.18.8-00 [19.4 MB]                                    
+Get:6 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubectl amd64 1.18.8-00 [8827 kB]                                    
+Get:7 https://packages.cloud.google.com/apt kubernetes-xenial/main amd64 kubeadm amd64 1.18.8-00 [8163 kB]                                    
+Fetched 70.6 MB in 20s (3516 kB/s)                                                                                                            
+Selecting previously unselected package conntrack.
+(Reading database ... 57437 files and directories currently installed.)
+Preparing to unpack .../0-conntrack_1%3a1.4.4+snapshot20161117-6ubuntu2_amd64.deb ...
+Unpacking conntrack (1:1.4.4+snapshot20161117-6ubuntu2) ...
+Selecting previously unselected package cri-tools.
+Preparing to unpack .../1-cri-tools_1.13.0-01_amd64.deb ...
+Unpacking cri-tools (1.13.0-01) ...
+Selecting previously unselected package kubernetes-cni.
+Preparing to unpack .../2-kubernetes-cni_0.8.6-00_amd64.deb ...
+Unpacking kubernetes-cni (0.8.6-00) ...
+Selecting previously unselected package socat.
+Preparing to unpack .../3-socat_1.7.3.2-2ubuntu2_amd64.deb ...
+Unpacking socat (1.7.3.2-2ubuntu2) ...
+Selecting previously unselected package kubelet.
+Preparing to unpack .../4-kubelet_1.18.8-00_amd64.deb ...
+Unpacking kubelet (1.18.8-00) ...
+Selecting previously unselected package kubectl.
+Preparing to unpack .../5-kubectl_1.18.8-00_amd64.deb ...
+Unpacking kubectl (1.18.8-00) ...
+Selecting previously unselected package kubeadm.
+Preparing to unpack .../6-kubeadm_1.18.8-00_amd64.deb ...
+Unpacking kubeadm (1.18.8-00) ...
+Setting up conntrack (1:1.4.4+snapshot20161117-6ubuntu2) ...
+Setting up kubernetes-cni (0.8.6-00) ...
+Setting up cri-tools (1.13.0-01) ...
+Setting up socat (1.7.3.2-2ubuntu2) ...
+Setting up kubelet (1.18.8-00) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/kubelet.service → /lib/systemd/system/kubelet.service.
+Setting up kubectl (1.18.8-00) ...
+Setting up kubeadm (1.18.8-00) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo apt-mark hold kubelet kubeadm kubectl
+kubelet set on hold.
+kubeadm set on hold.
+kubectl set on hold.
+ubuntu@master:~$ ls -lrta /var/run/docker.sock
+srw-rw---- 1 root docker 0 Aug 16 02:55 /var/run/docker.sock
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo chown docker /var/run/docker.sock
+chown: invalid user: ‘docker’
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo chmod 777 /var/run/docker.sock
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrta /var/run/docker.sock
+srwxrwxrwx 1 root docker 0 Aug 16 02:55 /var/run/docker.sock
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo vi /etc/hosts
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ top
+
+top - 03:09:16 up 24 min,  1 user,  load average: 0.00, 0.01, 0.00
+Tasks: 106 total,   1 running,  58 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  1.3 us,  0.7 sy,  0.0 ni, 98.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  4028180 total,  2383732 free,   204720 used,  1439728 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3587456 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                   
+    1 root      20   0  159952   9200   6696 S   0.3  0.2   0:04.32 systemd                                                                   
+  441 root      20   0   43272   4360   3212 S   0.3  0.1   0:01.37 systemd-udevd                                                             
+ 1254 root      20   0  939504  33460  15364 S   0.3  0.8   0:02.11 snapd                                                                     
+ 2863 root      20   0  811984  42280  25136 S   0.3  1.0   0:02.96 containerd                                                                
+ 4559 root      20   0  978836  83912  47288 S   0.3  2.1   0:00.31 dockerd                                                                   
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                  
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_gp                                                                    
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_par_gp                                                                
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H-kb                                                           
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                                                              
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.06 ksoftirqd/0                                                               
+   11 root      20   0       0      0      0 I   0.0  0.0   0:00.08 rcu_sched                                                                 
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.01 migration/0                                                               
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                                                                   
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                                                                   
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.25 migration/1                                                               
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.07 ksoftirqd/1                                                               
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H-kb                                                           
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                 
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                                                                     
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_tasks_kthre                                                           
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kauditd                                                                   
+   23 root      20   0       0      0      0 S   0.0  0.0   0:00.00 xenbus                                                                    
+   24 root      20   0       0      0      0 S   0.0  0.0   0:00.02 xenwatch                                                                  
+   25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                                                                
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper                                                                
+   27 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 writeback                                                                 
+   28 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kcompactd0                                                                
+   29 root      25   5       0      0      0 S   0.0  0.0   0:00.00 ksmd                                                                      
+   30 root      39  19       0      0      0 S   0.0  0.0   0:00.00 khugepaged                                                                
+   76 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kintegrityd                                                               
+   77 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kblockd                                                                   
+   78 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 blkcg_punt_bio                                                            
+   79 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 tpm_dev_wq                                                                
+   80 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 ata_sff                                                                   
+   81 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 md                                                                        
+ubuntu@master:~$ 
+ubuntu@master:~$ pwd
+/home/ubuntu
+ubuntu@master:~$ kube
+kubeadm  kubectl  kubelet  
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+W0816 03:12:27.756505    8829 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
+[init] Using Kubernetes version: v1.18.8
+[preflight] Running pre-flight checks
+	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [master.codewithkesav.com kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 172.31.35.77]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [master.codewithkesav.com localhost] and IPs [172.31.35.77 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [master.codewithkesav.com localhost] and IPs [172.31.35.77 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+W0816 03:13:29.335887    8829 manifests.go:225] the default kube-apiserver authorization-mode is "Node,RBAC"; using "Node,RBAC"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+W0816 03:13:29.336931    8829 manifests.go:225] the default kube-apiserver authorization-mode is "Node,RBAC"; using "Node,RBAC"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[apiclient] All control plane components are healthy after 15.002723 seconds
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config-1.18" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node master.codewithkesav.com as control-plane by adding the label "node-role.kubernetes.io/master=''"
+[mark-control-plane] Marking the node master.codewithkesav.com as control-plane by adding the taints [node-role.kubernetes.io/master:NoSchedule]
+[bootstrap-token] Using token: 0cbzuz.wsehymkln2lqz9q7
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.35.77:6443 --token 0cbzuz.wsehymkln2lqz9q7 \
+    --discovery-token-ca-cert-hash sha256:525a8745984d4d1e816cae7e5fb0123ca521f3781016c15f5bacee3acd1f2979 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrta
+total 36
+-rw-r--r-- 1 ubuntu ubuntu  807 Apr  4  2018 .profile
+-rw-r--r-- 1 ubuntu ubuntu 3771 Apr  4  2018 .bashrc
+-rw-r--r-- 1 ubuntu ubuntu  220 Apr  4  2018 .bash_logout
+drwxr-xr-x 3 root   root   4096 Aug 16 02:44 ..
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:44 .ssh
+drwx------ 3 ubuntu ubuntu 4096 Aug 16 02:48 .gnupg
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:48 .cache
+-rw-r--r-- 1 ubuntu ubuntu    0 Aug 16 02:50 .sudo_as_admin_successful
+-rw------- 1 root   root   1320 Aug 16 03:04 .viminfo
+drwxr-xr-x 5 ubuntu ubuntu 4096 Aug 16 03:04 .
+ubuntu@master:~$ mkdir -p $HOME/.kube
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrta
+total 40
+-rw-r--r-- 1 ubuntu ubuntu  807 Apr  4  2018 .profile
+-rw-r--r-- 1 ubuntu ubuntu 3771 Apr  4  2018 .bashrc
+-rw-r--r-- 1 ubuntu ubuntu  220 Apr  4  2018 .bash_logout
+drwxr-xr-x 3 root   root   4096 Aug 16 02:44 ..
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:44 .ssh
+drwx------ 3 ubuntu ubuntu 4096 Aug 16 02:48 .gnupg
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:48 .cache
+-rw-r--r-- 1 ubuntu ubuntu    0 Aug 16 02:50 .sudo_as_admin_successful
+-rw------- 1 root   root   1320 Aug 16 03:04 .viminfo
+drwxrwxr-x 2 ubuntu ubuntu 4096 Aug 16 03:14 .kube
+drwxr-xr-x 6 ubuntu ubuntu 4096 Aug 16 03:14 .
+ubuntu@master:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrta .kube/config 
+-rw------- 1 root root 5452 Aug 16 03:15 .kube/config
+ubuntu@master:~$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ubuntu@master:~$ ls -lrta .kube/config 
+-rw------- 1 ubuntu ubuntu 5452 Aug 16 03:15 .kube/config
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+podsecuritypolicy.policy/psp.flannel.unprivileged created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds-amd64 created
+daemonset.apps/kube-flannel-ds-arm64 created
+daemonset.apps/kube-flannel-ds-arm created
+daemonset.apps/kube-flannel-ds-ppc64le created
+daemonset.apps/kube-flannel-ds-s390x created
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy                v1.18.8             0fb7201f92d0        2 days ago          117MB
+k8s.gcr.io/kube-apiserver            v1.18.8             92d040a0dca7        2 days ago          173MB
+k8s.gcr.io/kube-controller-manager   v1.18.8             6a979351fe5e        2 days ago          162MB
+k8s.gcr.io/kube-scheduler            v1.18.8             6f7135fb47e0        2 days ago          95.3MB
+quay.io/coreos/flannel               v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause                     3.2                 80d28bedfe5d        6 months ago        683kB
+k8s.gcr.io/coredns                   1.6.7               67da37a9a360        6 months ago        43.8MB
+k8s.gcr.io/etcd                      3.4.3-0             303ce5db0e90        9 months ago        288MB
+ubuntu@master:~$ 
+ubuntu@master:~$ docker ps
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS               NAMES
+3679334ac0fe        4e9f801d2217           "/opt/bin/flanneld -…"   9 seconds ago       Up 9 seconds                            k8s_kube-flannel_kube-flannel-ds-amd64-569rt_kube-system_17d3e37e-d14c-48ea-8cb2-dc7fb3216e6c_0
+531a08e9ba9e        k8s.gcr.io/pause:3.2   "/pause"                 12 seconds ago      Up 12 seconds                           k8s_POD_kube-flannel-ds-amd64-569rt_kube-system_17d3e37e-d14c-48ea-8cb2-dc7fb3216e6c_0
+81be8eb5a00b        0fb7201f92d0           "/usr/local/bin/kube…"   5 minutes ago       Up 5 minutes                            k8s_kube-proxy_kube-proxy-xg66t_kube-system_e161b9bb-2bdf-4fc4-9137-931d558b8169_0
+5fb9083d368c        k8s.gcr.io/pause:3.2   "/pause"                 5 minutes ago       Up 5 minutes                            k8s_POD_kube-proxy-xg66t_kube-system_e161b9bb-2bdf-4fc4-9137-931d558b8169_0
+5b446b6f7d10        6f7135fb47e0           "kube-scheduler --au…"   5 minutes ago       Up 5 minutes                            k8s_kube-scheduler_kube-scheduler-master.codewithkesav.com_kube-system_c808ba8a724ff4e00643b5c4f7fc454b_0
+51af335fcbb1        6a979351fe5e           "kube-controller-man…"   5 minutes ago       Up 5 minutes                            k8s_kube-controller-manager_kube-controller-manager-master.codewithkesav.com_kube-system_a67e89140d05fa486673d78254804620_0
+f0c24d9fc3fb        92d040a0dca7           "kube-apiserver --ad…"   5 minutes ago       Up 5 minutes                            k8s_kube-apiserver_kube-apiserver-master.codewithkesav.com_kube-system_6aa6c55c440e487cd3bdb50671752197_0
+bd0b2ab51e6b        303ce5db0e90           "etcd --advertise-cl…"   5 minutes ago       Up 5 minutes                            k8s_etcd_etcd-master.codewithkesav.com_kube-system_3a8411241591fd425156f554d666d7d7_0
+f1c68c2d6772        k8s.gcr.io/pause:3.2   "/pause"                 5 minutes ago       Up 5 minutes                            k8s_POD_kube-scheduler-master.codewithkesav.com_kube-system_c808ba8a724ff4e00643b5c4f7fc454b_0
+a94ea0685bda        k8s.gcr.io/pause:3.2   "/pause"                 5 minutes ago       Up 5 minutes                            k8s_POD_kube-controller-manager-master.codewithkesav.com_kube-system_a67e89140d05fa486673d78254804620_0
+7849edbc7849        k8s.gcr.io/pause:3.2   "/pause"                 5 minutes ago       Up 5 minutes                            k8s_POD_kube-apiserver-master.codewithkesav.com_kube-system_6aa6c55c440e487cd3bdb50671752197_0
+4a1e10427c92        k8s.gcr.io/pause:3.2   "/pause"                 5 minutes ago       Up 5 minutes                            k8s_POD_etcd-master.codewithkesav.com_kube-system_3a8411241591fd425156f554d666d7d7_0
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ pwd
+/home/ubuntu
+ubuntu@master:~$ kubectl get pods
+No resources found in default namespace.
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   11m   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.35.77:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: REDACTED
+    client-key-data: REDACTED
+ubuntu@master:~$ cat /etc/hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+# Kubernetes Master
+172.31.35.77 master.codewithkesav.com
+
+# Kubernetes Node-1
+172.31.46.9 node1.codewithkesav.com
+
+# Kubernetes Node-2
+172.31.40.106 node2.codewithkesav.com
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   12m
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   12m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe nodes
+Name:               master.codewithkesav.com
+Roles:              master
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=master.codewithkesav.com
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/master=
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VtepMAC":"6e:c1:c2:78:76:40"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: 172.31.35.77
+                    kubeadm.alpha.kubernetes.io/cri-socket: /var/run/dockershim.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sun, 16 Aug 2020 03:13:42 +0000
+Taints:             node-role.kubernetes.io/master:NoSchedule
+Unschedulable:      false
+Lease:
+  HolderIdentity:  master.codewithkesav.com
+  AcquireTime:     <unset>
+  RenewTime:       Sun, 16 Aug 2020 03:26:56 +0000
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sun, 16 Aug 2020 03:18:57 +0000   Sun, 16 Aug 2020 03:18:57 +0000   FlannelIsUp                  Flannel is running on this node
+  MemoryPressure       False   Sun, 16 Aug 2020 03:24:17 +0000   Sun, 16 Aug 2020 03:13:39 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sun, 16 Aug 2020 03:24:17 +0000   Sun, 16 Aug 2020 03:13:39 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sun, 16 Aug 2020 03:24:17 +0000   Sun, 16 Aug 2020 03:13:39 +0000   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sun, 16 Aug 2020 03:24:17 +0000   Sun, 16 Aug 2020 03:18:56 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  172.31.35.77
+  Hostname:    master.codewithkesav.com
+Capacity:
+  cpu:                2
+  ephemeral-storage:  30428560Ki
+  hugepages-2Mi:      0
+  memory:             4028180Ki
+  pods:               110
+Allocatable:
+  cpu:                2
+  ephemeral-storage:  28042960850
+  hugepages-2Mi:      0
+  memory:             3925780Ki
+  pods:               110
+System Info:
+  Machine ID:                 36f0b37638844d7ba58dc9276fd9f92e
+  System UUID:                ec2bfecd-dc14-d69a-2a23-fc20d6ba4159
+  Boot ID:                    ff8958cb-8135-4524-9440-426913c6da8e
+  Kernel Version:             5.3.0-1032-aws
+  OS Image:                   Ubuntu 18.04.5 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  docker://19.3.6
+  Kubelet Version:            v1.18.8
+  Kube-Proxy Version:         v1.18.8
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+Non-terminated Pods:          (8 in total)
+  Namespace                   Name                                                CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+  ---------                   ----                                                ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-66bff467f8-lrsmw                            100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     13m
+  kube-system                 coredns-66bff467f8-mqwb4                            100m (5%)     0 (0%)      70Mi (1%)        170Mi (4%)     13m
+  kube-system                 etcd-master.codewithkesav.com                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         13m
+  kube-system                 kube-apiserver-master.codewithkesav.com             250m (12%)    0 (0%)      0 (0%)           0 (0%)         13m
+  kube-system                 kube-controller-manager-master.codewithkesav.com    200m (10%)    0 (0%)      0 (0%)           0 (0%)         13m
+  kube-system                 kube-flannel-ds-amd64-569rt                         100m (5%)     100m (5%)   50Mi (1%)        50Mi (1%)      8m10s
+  kube-system                 kube-proxy-xg66t                                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         13m
+  kube-system                 kube-scheduler-master.codewithkesav.com             100m (5%)     0 (0%)      0 (0%)           0 (0%)         13m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                850m (42%)  100m (5%)
+  memory             190Mi (4%)  390Mi (10%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type    Reason                   Age                From                                  Message
+  ----    ------                   ----               ----                                  -------
+  Normal  NodeHasSufficientMemory  13m (x4 over 13m)  kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeHasSufficientMemory
+  Normal  NodeHasNoDiskPressure    13m (x4 over 13m)  kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeHasNoDiskPressure
+  Normal  NodeHasSufficientPID     13m (x4 over 13m)  kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeHasSufficientPID
+  Normal  Starting                 13m                kubelet, master.codewithkesav.com     Starting kubelet.
+  Normal  NodeHasSufficientMemory  13m                kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeHasSufficientMemory
+  Normal  NodeHasNoDiskPressure    13m                kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeHasNoDiskPressure
+  Normal  NodeHasSufficientPID     13m                kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeHasSufficientPID
+  Normal  NodeAllocatableEnforced  13m                kubelet, master.codewithkesav.com     Updated Node Allocatable limit across pods
+  Normal  Starting                 12m                kube-proxy, master.codewithkesav.com  Starting kube-proxy.
+  Normal  NodeReady                8m4s               kubelet, master.codewithkesav.com     Node master.codewithkesav.com status is now: NodeReady
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          13m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          13m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          13m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          13m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          13m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          8m54s
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          13m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          13m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get node
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   14m   v1.18.8
+ubuntu@master:~$ kubectl get pods -o wide
+No resources found in default namespace.
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get node
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   15m   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get node
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   16m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   32s   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   17m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   40s   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS     ROLES    AGE   VERSION
+master.codewithkesav.com   Ready      master   17m   v1.18.8
+node1.codewithkesav.com    Ready      <none>   80s   v1.18.8
+node2.codewithkesav.com    NotReady   <none>   12s   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   17m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   93s   v1.18.8
+node2.codewithkesav.com    Ready    <none>   25s   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          18m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          18m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          18m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          18m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          18m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          13m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          2m36s
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          88s
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          2m36s
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          88s
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          18m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          18m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ # docker pull nginx 
+ubuntu@master:~$ 
+ubuntu@master:~$ # docker run -d --name nginx -p 80:80 image_name
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ top
+
+top - 03:36:51 up 52 min,  1 user,  load average: 0.70, 0.25, 0.16
+Tasks: 134 total,   1 running,  91 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.2 us,  0.7 sy,  0.0 ni, 96.9 id,  0.0 wa,  0.0 hi,  0.0 si,  0.2 st
+KiB Mem :  4028180 total,  1040396 free,   696812 used,  2290972 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3117772 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                   
+10320 root      20   0  497460 342928  71368 S   3.0  8.5   0:46.50 kube-apiserver                                                            
+10237 root      20   0 10.120g  54932  22384 S   1.7  1.4   0:20.26 etcd                                                                      
+10685 root      20   0 1345600  91884  64700 S   1.7  2.3   0:25.46 kubelet                                                                   
+10330 root      20   0  211048  95668  58756 S   1.0  2.4   0:17.37 kube-controller                                                           
+10398 root      20   0  145148  45952  32952 S   0.7  1.1   0:04.49 kube-scheduler                                                            
+ 4559 root      20   0 1360180 107664  49336 S   0.3  2.7   0:21.52 dockerd                                                                   
+12893 root      20   0  145752  35668  29344 S   0.3  0.9   0:02.29 coredns                                                                   
+12955 root      20   0  145752  33840  27744 S   0.3  0.8   0:02.30 coredns                                                                   
+    1 root      20   0  160056   9256   6696 S   0.0  0.2   0:04.78 systemd                                                                   
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                  
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_gp                                                                    
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_par_gp                                                                
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H-kb                                                           
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                                                              
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.13 ksoftirqd/0                                                               
+   11 root      20   0       0      0      0 I   0.0  0.0   0:00.55 rcu_sched                                                                 
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.01 migration/0                                                               
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                                                                   
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                                                                   
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.26 migration/1                                                               
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.12 ksoftirqd/1                                                               
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H-kb                                                           
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                 
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                                                                     
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_tasks_kthre                                                           
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kauditd                                                                   
+   23 root      20   0       0      0      0 S   0.0  0.0   0:00.00 xenbus                                                                    
+   24 root      20   0       0      0      0 S   0.0  0.0   0:00.02 xenwatch                                                                  
+   25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                                                                
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper                                                                
+   27 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 writeback                                                                 
+   28 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kcompactd0                                                                
+   29 root      25   5       0      0      0 S   0.0  0.0   0:00.00 ksmd                                                                      
+   30 root      39  19       0      0      0 S   0.0  0.0   0:00.00 khugepaged                                                                
+   76 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kintegrityd                                                               
+   77 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kblockd                                                                   
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl apply -f https://k8s.io/examples/application/deployment.yaml
+deployment.apps/nginx-deployment created
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrta
+total 40
+-rw-r--r-- 1 ubuntu ubuntu  807 Apr  4  2018 .profile
+-rw-r--r-- 1 ubuntu ubuntu 3771 Apr  4  2018 .bashrc
+-rw-r--r-- 1 ubuntu ubuntu  220 Apr  4  2018 .bash_logout
+drwxr-xr-x 3 root   root   4096 Aug 16 02:44 ..
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:44 .ssh
+drwx------ 3 ubuntu ubuntu 4096 Aug 16 02:48 .gnupg
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:48 .cache
+-rw-r--r-- 1 ubuntu ubuntu    0 Aug 16 02:50 .sudo_as_admin_successful
+-rw------- 1 root   root   1320 Aug 16 03:04 .viminfo
+drwxr-xr-x 6 ubuntu ubuntu 4096 Aug 16 03:14 .
+drwxrwxr-x 4 ubuntu ubuntu 4096 Aug 16 03:18 .kube
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe deployment nginx-deployment
+Name:                   nginx-deployment
+Namespace:              default
+CreationTimestamp:      Sun, 16 Aug 2020 03:37:55 +0000
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=nginx
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx:1.14.2
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-deployment-6b474476c4 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  32s   deployment-controller  Scaled up replica set nginx-deployment-6b474476c4 to 2
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods -l app=nginx
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-6b474476c4-crzxh   1/1     Running   0          94s
+nginx-deployment-6b474476c4-ffl8h   1/1     Running   0          94s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ docker images
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy                v1.18.8             0fb7201f92d0        2 days ago          117MB
+k8s.gcr.io/kube-apiserver            v1.18.8             92d040a0dca7        2 days ago          173MB
+k8s.gcr.io/kube-controller-manager   v1.18.8             6a979351fe5e        2 days ago          162MB
+k8s.gcr.io/kube-scheduler            v1.18.8             6f7135fb47e0        2 days ago          95.3MB
+quay.io/coreos/flannel               v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause                     3.2                 80d28bedfe5d        6 months ago        683kB
+k8s.gcr.io/coredns                   1.6.7               67da37a9a360        6 months ago        43.8MB
+k8s.gcr.io/etcd                      3.4.3-0             303ce5db0e90        9 months ago        288MB
+ubuntu@master:~$ docker ps
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS               NAMES
+abbf2a6a3cea        67da37a9a360           "/coredns -conf /etc…"   21 minutes ago      Up 21 minutes                           k8s_coredns_coredns-66bff467f8-mqwb4_kube-system_70f15f3d-0f80-465f-8409-762e0069aa9f_0
+29cd488c7605        67da37a9a360           "/coredns -conf /etc…"   21 minutes ago      Up 21 minutes                           k8s_coredns_coredns-66bff467f8-lrsmw_kube-system_b8c5d785-30c1-4279-ade2-a4343435d039_0
+7e7ecaa16aeb        k8s.gcr.io/pause:3.2   "/pause"                 21 minutes ago      Up 21 minutes                           k8s_POD_coredns-66bff467f8-lrsmw_kube-system_b8c5d785-30c1-4279-ade2-a4343435d039_0
+dcee9b79c204        k8s.gcr.io/pause:3.2   "/pause"                 21 minutes ago      Up 21 minutes                           k8s_POD_coredns-66bff467f8-mqwb4_kube-system_70f15f3d-0f80-465f-8409-762e0069aa9f_0
+3679334ac0fe        4e9f801d2217           "/opt/bin/flanneld -…"   21 minutes ago      Up 21 minutes                           k8s_kube-flannel_kube-flannel-ds-amd64-569rt_kube-system_17d3e37e-d14c-48ea-8cb2-dc7fb3216e6c_0
+531a08e9ba9e        k8s.gcr.io/pause:3.2   "/pause"                 21 minutes ago      Up 21 minutes                           k8s_POD_kube-flannel-ds-amd64-569rt_kube-system_17d3e37e-d14c-48ea-8cb2-dc7fb3216e6c_0
+81be8eb5a00b        0fb7201f92d0           "/usr/local/bin/kube…"   26 minutes ago      Up 26 minutes                           k8s_kube-proxy_kube-proxy-xg66t_kube-system_e161b9bb-2bdf-4fc4-9137-931d558b8169_0
+5fb9083d368c        k8s.gcr.io/pause:3.2   "/pause"                 26 minutes ago      Up 26 minutes                           k8s_POD_kube-proxy-xg66t_kube-system_e161b9bb-2bdf-4fc4-9137-931d558b8169_0
+5b446b6f7d10        6f7135fb47e0           "kube-scheduler --au…"   27 minutes ago      Up 27 minutes                           k8s_kube-scheduler_kube-scheduler-master.codewithkesav.com_kube-system_c808ba8a724ff4e00643b5c4f7fc454b_0
+51af335fcbb1        6a979351fe5e           "kube-controller-man…"   27 minutes ago      Up 27 minutes                           k8s_kube-controller-manager_kube-controller-manager-master.codewithkesav.com_kube-system_a67e89140d05fa486673d78254804620_0
+f0c24d9fc3fb        92d040a0dca7           "kube-apiserver --ad…"   27 minutes ago      Up 27 minutes                           k8s_kube-apiserver_kube-apiserver-master.codewithkesav.com_kube-system_6aa6c55c440e487cd3bdb50671752197_0
+bd0b2ab51e6b        303ce5db0e90           "etcd --advertise-cl…"   27 minutes ago      Up 27 minutes                           k8s_etcd_etcd-master.codewithkesav.com_kube-system_3a8411241591fd425156f554d666d7d7_0
+f1c68c2d6772        k8s.gcr.io/pause:3.2   "/pause"                 27 minutes ago      Up 27 minutes                           k8s_POD_kube-scheduler-master.codewithkesav.com_kube-system_c808ba8a724ff4e00643b5c4f7fc454b_0
+a94ea0685bda        k8s.gcr.io/pause:3.2   "/pause"                 27 minutes ago      Up 27 minutes                           k8s_POD_kube-controller-manager-master.codewithkesav.com_kube-system_a67e89140d05fa486673d78254804620_0
+7849edbc7849        k8s.gcr.io/pause:3.2   "/pause"                 27 minutes ago      Up 27 minutes                           k8s_POD_kube-apiserver-master.codewithkesav.com_kube-system_6aa6c55c440e487cd3bdb50671752197_0
+4a1e10427c92        k8s.gcr.io/pause:3.2   "/pause"                 27 minutes ago      Up 27 minutes                           k8s_POD_etcd-master.codewithkesav.com_kube-system_3a8411241591fd425156f554d666d7d7_0
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods -l app=nginx
+NAME                                READY   STATUS    RESTARTS   AGE
+nginx-deployment-6b474476c4-crzxh   1/1     Running   0          3m58s
+nginx-deployment-6b474476c4-ffl8h   1/1     Running   0          3m58s
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   28m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   12m   v1.18.8
+node2.codewithkesav.com    Ready    <none>   10m   v1.18.8
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+default       nginx-deployment-6b474476c4-crzxh                  1/1     Running   0          4m25s
+default       nginx-deployment-6b474476c4-ffl8h                  1/1     Running   0          4m25s
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          28m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          28m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          28m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          28m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          28m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          23m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          12m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          11m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          12m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          11m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          28m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          28m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   31m
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   31m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   15m   v1.18.8
+node2.codewithkesav.com    Ready    <none>   14m   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ curl node1.codewithkesav.com:30855
+curl: (7) Failed to connect to node1.codewithkesav.com port 30855: Connection refused
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl delete deployment nginx-deployment
+deployment.apps "nginx-deployment" deleted
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          33m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          33m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          34m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          34m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          34m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          29m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          17m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          16m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          17m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          16m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          33m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          34m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   34m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   18m   v1.18.8
+node2.codewithkesav.com    Ready    <none>   16m   v1.18.8
+ubuntu@master:~$ kubectl get pods -l app=nginx
+No resources found in default namespace.
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ pwd
+/home/ubuntu
+ubuntu@master:~$ ls -lrta
+total 40
+-rw-r--r-- 1 ubuntu ubuntu  807 Apr  4  2018 .profile
+-rw-r--r-- 1 ubuntu ubuntu 3771 Apr  4  2018 .bashrc
+-rw-r--r-- 1 ubuntu ubuntu  220 Apr  4  2018 .bash_logout
+drwxr-xr-x 3 root   root   4096 Aug 16 02:44 ..
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:44 .ssh
+drwx------ 3 ubuntu ubuntu 4096 Aug 16 02:48 .gnupg
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:48 .cache
+-rw-r--r-- 1 ubuntu ubuntu    0 Aug 16 02:50 .sudo_as_admin_successful
+-rw------- 1 root   root   1320 Aug 16 03:04 .viminfo
+drwxr-xr-x 6 ubuntu ubuntu 4096 Aug 16 03:14 .
+drwxrwxr-x 4 ubuntu ubuntu 4096 Aug 16 03:18 .kube
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo kubectl create deployment ngix --image=nginx
+deployment.apps/ngix created
+ubuntu@master:~$ 
+ubuntu@master:~$ ls -lrta
+total 40
+-rw-r--r-- 1 ubuntu ubuntu  807 Apr  4  2018 .profile
+-rw-r--r-- 1 ubuntu ubuntu 3771 Apr  4  2018 .bashrc
+-rw-r--r-- 1 ubuntu ubuntu  220 Apr  4  2018 .bash_logout
+drwxr-xr-x 3 root   root   4096 Aug 16 02:44 ..
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:44 .ssh
+drwx------ 3 ubuntu ubuntu 4096 Aug 16 02:48 .gnupg
+drwx------ 2 ubuntu ubuntu 4096 Aug 16 02:48 .cache
+-rw-r--r-- 1 ubuntu ubuntu    0 Aug 16 02:50 .sudo_as_admin_successful
+-rw------- 1 root   root   1320 Aug 16 03:04 .viminfo
+drwxr-xr-x 6 ubuntu ubuntu 4096 Aug 16 03:14 .
+drwxrwxr-x 4 ubuntu ubuntu 4096 Aug 16 03:18 .kube
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods -l app=nginx
+No resources found in default namespace.
+ubuntu@master:~$ kubectl get pods -l app=ngix
+NAME                    READY   STATUS    RESTARTS   AGE
+ngix-866fc4f4b5-wq49z   1/1     Running   0          43s
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   36m
+ubuntu@master:~$ kubectl describe deployment nginx
+Error from server (NotFound): deployments.apps "nginx" not found
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe deployment ngix
+Name:                   ngix
+Namespace:              default
+CreationTimestamp:      Sun, 16 Aug 2020 03:49:27 +0000
+Labels:                 app=ngix
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=ngix
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=ngix
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   ngix-866fc4f4b5 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  86s   deployment-controller  Scaled up replica set ngix-866fc4f4b5 to 1
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   37m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   21m   v1.18.8
+node2.codewithkesav.com    Ready    <none>   19m   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+default       ngix-866fc4f4b5-wq49z                              1/1     Running   0          2m2s
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          37m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          37m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          37m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          37m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          37m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          32m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          21m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          20m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          21m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          20m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          37m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          37m
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   38m
+ubuntu@master:~$ 
+ubuntu@master:~$ sudo kubectl create service nodeport ngix --tcp=80:80 
+service/ngix created
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP        39m
+ngix         NodePort    10.111.185.231   <none>        80:31654/TCP   11s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+default       ngix-866fc4f4b5-wq49z                              1/1     Running   0          3m57s
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          39m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          39m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          39m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          39m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          39m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          34m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          23m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          22m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          23m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          22m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          39m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          39m
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   39m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   23m   v1.18.8
+node2.codewithkesav.com    Ready    <none>   22m   v1.18.8
+ubuntu@master:~$ 
+ubuntu@master:~$ curl node1.codewithkesav.com:31654
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@master:~$ 
+ubuntu@master:~$ curl node2.codewithkesav.com:31654
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@master:~$ curl master.codewithkesav.com:31654
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+ngix-866fc4f4b5   1         1         1       5m21s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe deployments
+Name:                   ngix
+Namespace:              default
+CreationTimestamp:      Sun, 16 Aug 2020 03:49:27 +0000
+Labels:                 app=ngix
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=ngix
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=ngix
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   ngix-866fc4f4b5 (1/1 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  5m35s  deployment-controller  Scaled up replica set ngix-866fc4f4b5 to 1
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get nodes
+NAME                       STATUS   ROLES    AGE   VERSION
+master.codewithkesav.com   Ready    master   42m   v1.18.8
+node1.codewithkesav.com    Ready    <none>   25m   v1.18.8
+node2.codewithkesav.com    Ready    <none>   24m   v1.18.8
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+default       ngix-866fc4f4b5-wq49z                              1/1     Running   0          6m35s
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          42m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          42m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          42m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          42m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          42m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          37m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          25m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          24m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          25m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          24m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          42m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          42m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl scale deployment ngix --replicas=4
+deployment.apps/ngix scaled
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+ngix-866fc4f4b5   4         4         4       7m46s
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+default       ngix-866fc4f4b5-8x5xg                              1/1     Running   0          15s
+default       ngix-866fc4f4b5-wq49z                              1/1     Running   0          7m53s
+default       ngix-866fc4f4b5-z6vb8                              1/1     Running   0          15s
+default       ngix-866fc4f4b5-zbxjt                              1/1     Running   0          15s
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          43m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          43m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          43m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          43m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          43m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          38m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          27m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          26m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          27m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          26m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          43m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          43m
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods -l app=ngix
+NAME                    READY   STATUS    RESTARTS   AGE
+ngix-866fc4f4b5-8x5xg   1/1     Running   0          46s
+ngix-866fc4f4b5-wq49z   1/1     Running   0          8m24s
+ngix-866fc4f4b5-z6vb8   1/1     Running   0          46s
+ngix-866fc4f4b5-zbxjt   1/1     Running   0          46s
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl scale deployment ngix --replicas=2
+deployment.apps/ngix scaled
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods -l app=ngix
+NAME                    READY   STATUS        RESTARTS   AGE
+ngix-866fc4f4b5-8x5xg   0/1     Terminating   0          87s
+ngix-866fc4f4b5-wq49z   1/1     Running       0          9m5s
+ngix-866fc4f4b5-z6vb8   1/1     Running       0          87s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                               READY   STATUS    RESTARTS   AGE
+default       ngix-866fc4f4b5-wq49z                              1/1     Running   0          9m10s
+default       ngix-866fc4f4b5-z6vb8                              1/1     Running   0          92s
+kube-system   coredns-66bff467f8-lrsmw                           1/1     Running   0          44m
+kube-system   coredns-66bff467f8-mqwb4                           1/1     Running   0          44m
+kube-system   etcd-master.codewithkesav.com                      1/1     Running   0          44m
+kube-system   kube-apiserver-master.codewithkesav.com            1/1     Running   0          44m
+kube-system   kube-controller-manager-master.codewithkesav.com   1/1     Running   0          44m
+kube-system   kube-flannel-ds-amd64-569rt                        1/1     Running   0          39m
+kube-system   kube-flannel-ds-amd64-b9rrg                        1/1     Running   0          28m
+kube-system   kube-flannel-ds-amd64-mbxsr                        1/1     Running   0          27m
+kube-system   kube-proxy-f2m4m                                   1/1     Running   0          28m
+kube-system   kube-proxy-pgwpp                                   1/1     Running   0          27m
+kube-system   kube-proxy-xg66t                                   1/1     Running   0          44m
+kube-system   kube-scheduler-master.codewithkesav.com            1/1     Running   0          44m
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get deployments ngix
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+ngix   2/2     2            2           9m35s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe deployments ngix
+Name:                   ngix
+Namespace:              default
+CreationTimestamp:      Sun, 16 Aug 2020 03:49:27 +0000
+Labels:                 app=ngix
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=ngix
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=ngix
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   ngix-866fc4f4b5 (2/2 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  9m45s  deployment-controller  Scaled up replica set ngix-866fc4f4b5 to 1
+  Normal  ScalingReplicaSet  2m7s   deployment-controller  Scaled up replica set ngix-866fc4f4b5 to 4
+  Normal  ScalingReplicaSet  43s    deployment-controller  Scaled down replica set ngix-866fc4f4b5 to 2
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get replicasets
+NAME              DESIRED   CURRENT   READY   AGE
+ngix-866fc4f4b5   2         2         2       9m54s
+ubuntu@master:~$ kubectl describe replicasets
+Name:           ngix-866fc4f4b5
+Namespace:      default
+Selector:       app=ngix,pod-template-hash=866fc4f4b5
+Labels:         app=ngix
+                pod-template-hash=866fc4f4b5
+Annotations:    deployment.kubernetes.io/desired-replicas: 2
+                deployment.kubernetes.io/max-replicas: 3
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/ngix
+Replicas:       2 current / 2 desired
+Pods Status:    2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=ngix
+           pod-template-hash=866fc4f4b5
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  10m    replicaset-controller  Created pod: ngix-866fc4f4b5-wq49z
+  Normal  SuccessfulCreate  2m22s  replicaset-controller  Created pod: ngix-866fc4f4b5-zbxjt
+  Normal  SuccessfulCreate  2m22s  replicaset-controller  Created pod: ngix-866fc4f4b5-z6vb8
+  Normal  SuccessfulCreate  2m22s  replicaset-controller  Created pod: ngix-866fc4f4b5-8x5xg
+  Normal  SuccessfulDelete  58s    replicaset-controller  Deleted pod: ngix-866fc4f4b5-zbxjt
+  Normal  SuccessfulDelete  58s    replicaset-controller  Deleted pod: ngix-866fc4f4b5-8x5xg
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ # kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl apply -f https://k8s.io/examples/service/load-balancer-example.yaml
+deployment.apps/hello-world created
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ # t2.micro = 1 Core Processor , 1 GB Ram & 8 GB Hard Disk = 46 Users = 200 users 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get deployments hello-world
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+hello-world   5/5     5            5           11m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe deployments hello-world
+Name:                   hello-world
+Namespace:              default
+CreationTimestamp:      Sun, 16 Aug 2020 04:01:37 +0000
+Labels:                 app.kubernetes.io/name=load-balancer-example
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app.kubernetes.io/name=load-balancer-example
+Replicas:               5 desired | 5 updated | 5 total | 5 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app.kubernetes.io/name=load-balancer-example
+  Containers:
+   hello-world:
+    Image:        gcr.io/google-samples/node-hello:1.0
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   hello-world-7677cdf8dd (5/5 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  11m   deployment-controller  Scaled up replica set hello-world-7677cdf8dd to 5
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get replicasets
+NAME                     DESIRED   CURRENT   READY   AGE
+hello-world-7677cdf8dd   5         5         5       11m
+ngix-866fc4f4b5          2         2         2       23m
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl describe replicasets
+Name:           hello-world-7677cdf8dd
+Namespace:      default
+Selector:       app.kubernetes.io/name=load-balancer-example,pod-template-hash=7677cdf8dd
+Labels:         app.kubernetes.io/name=load-balancer-example
+                pod-template-hash=7677cdf8dd
+Annotations:    deployment.kubernetes.io/desired-replicas: 5
+                deployment.kubernetes.io/max-replicas: 7
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/hello-world
+Replicas:       5 current / 5 desired
+Pods Status:    5 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app.kubernetes.io/name=load-balancer-example
+           pod-template-hash=7677cdf8dd
+  Containers:
+   hello-world:
+    Image:        gcr.io/google-samples/node-hello:1.0
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  12m   replicaset-controller  Created pod: hello-world-7677cdf8dd-bflns
+  Normal  SuccessfulCreate  12m   replicaset-controller  Created pod: hello-world-7677cdf8dd-dxj7c
+  Normal  SuccessfulCreate  12m   replicaset-controller  Created pod: hello-world-7677cdf8dd-p9dlb
+  Normal  SuccessfulCreate  12m   replicaset-controller  Created pod: hello-world-7677cdf8dd-xrhkz
+  Normal  SuccessfulCreate  12m   replicaset-controller  Created pod: hello-world-7677cdf8dd-4jszk
+
+
+Name:           ngix-866fc4f4b5
+Namespace:      default
+Selector:       app=ngix,pod-template-hash=866fc4f4b5
+Labels:         app=ngix
+                pod-template-hash=866fc4f4b5
+Annotations:    deployment.kubernetes.io/desired-replicas: 2
+                deployment.kubernetes.io/max-replicas: 3
+                deployment.kubernetes.io/revision: 1
+Controlled By:  Deployment/ngix
+Replicas:       2 current / 2 desired
+Pods Status:    2 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=ngix
+           pod-template-hash=866fc4f4b5
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  24m   replicaset-controller  Created pod: ngix-866fc4f4b5-wq49z
+  Normal  SuccessfulCreate  16m   replicaset-controller  Created pod: ngix-866fc4f4b5-zbxjt
+  Normal  SuccessfulCreate  16m   replicaset-controller  Created pod: ngix-866fc4f4b5-z6vb8
+  Normal  SuccessfulCreate  16m   replicaset-controller  Created pod: ngix-866fc4f4b5-8x5xg
+  Normal  SuccessfulDelete  15m   replicaset-controller  Deleted pod: ngix-866fc4f4b5-zbxjt
+  Normal  SuccessfulDelete  15m   replicaset-controller  Deleted pod: ngix-866fc4f4b5-8x5xg
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl expose deployment hello-world --type=LoadBalancer --name=my-service
+service/my-service exposed
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get services my-service
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+my-service   LoadBalancer   10.100.82.190   <pending>     8080:30828/TCP   10s
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get services my-service
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+my-service   LoadBalancer   10.100.82.190   <pending>     8080:30828/TCP   16s
+ubuntu@master:~$ kubectl get services my-service
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+my-service   LoadBalancer   10.100.82.190   <pending>     8080:30828/TCP   18s
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get services my-service
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+my-service   LoadBalancer   10.100.82.190   <pending>     8080:30828/TCP   20s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$  kubectl describe services my-service
+Name:                     my-service
+Namespace:                default
+Labels:                   app.kubernetes.io/name=load-balancer-example
+Annotations:              <none>
+Selector:                 app.kubernetes.io/name=load-balancer-example
+Type:                     LoadBalancer
+IP:                       10.100.82.190
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30828/TCP
+Endpoints:                10.244.1.5:8080,10.244.1.6:8080,10.244.1.7:8080 + 2 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ kubectl get pods --output=wide
+NAME                           READY   STATUS    RESTARTS   AGE   IP           NODE                      NOMINATED NODE   READINESS GATES
+hello-world-7677cdf8dd-4jszk   1/1     Running   0          13m   10.244.1.6   node1.codewithkesav.com   <none>           <none>
+hello-world-7677cdf8dd-bflns   1/1     Running   0          13m   10.244.1.5   node1.codewithkesav.com   <none>           <none>
+hello-world-7677cdf8dd-dxj7c   1/1     Running   0          13m   10.244.2.5   node2.codewithkesav.com   <none>           <none>
+hello-world-7677cdf8dd-p9dlb   1/1     Running   0          13m   10.244.1.7   node1.codewithkesav.com   <none>           <none>
+hello-world-7677cdf8dd-xrhkz   1/1     Running   0          13m   10.244.2.6   node2.codewithkesav.com   <none>           <none>
+ngix-866fc4f4b5-wq49z          1/1     Running   0          25m   10.244.2.3   node2.codewithkesav.com   <none>           <none>
+ngix-866fc4f4b5-z6vb8          1/1     Running   0          18m   10.244.2.4   node2.codewithkesav.com   <none>           <none>
+ubuntu@master:~$ kubectl get services my-service
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+my-service   LoadBalancer   10.100.82.190   <pending>     8080:30828/TCP   117s
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ curl http://10.100.82.190:30828
+
+^C
+ubuntu@master:~$ curl http://10.244.1.6:30828
+curl: (7) Failed to connect to 10.244.1.6 port 30828: Connection refused
+ubuntu@master:~$ curl http://10.244.1.6:8080
+Hello Kubernetes!ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ curl http://10.244.2.5:8080
+Hello Kubernetes!ubuntu@master:~$ 
+ubuntu@master:~$ 
+ubuntu@master:~$ curl http://10.244.1.6:80
+curl: (7) Failed to connect to 10.244.1.6 port 80: Connection refused
+ubuntu@master:~$ 
+ubuntu@master:~$ curl http://10.244.2.3:80
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@master:~$

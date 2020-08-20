@@ -1,0 +1,40 @@
+
+
+
+Convert CUI/CLI Linux Distribution to GUI :
+
+
+1. CentOS 7.8 :(Linux Distribution)
+
+sudo yum group list      #updating repo files
+
+sudo yum install "Server with GUI" -y   # installing packages related to GUI
+
+sudo rpm -qa|grep -i GUI    # verification 
+
+yum stands for yellowdog updater modified 
+7.	Systemctl set-default graphical.target – used to default desktop as GUI.
+8.	Systemctl set-default multi-user.target or init 3– used to default as CUI.
+
+2. Ubuntu 18.04:(Linux Distribution)
+
+cat /etc/issue   # To check Ubuntu version and LTS means long term support
+sudo apt-get update 
+
+sudo apt-get install tasksel -y # Utility Manager Tool 
+
+sudo apt-get install slim 
+
+sudo apt-get install lightdm(set it as default)
+
+7.	Sudo apt install ubuntu-desktop used to convert from CUI to GUI(it will take some time to isnatllgit )
+
+GNOME & KDM  are desktop environnment as part of Linux Distribution
+
+
+
+Download, install & Configure : Package Management 
+
+What is a VNC viewer used for?
+In computing, Virtual Network Computing (VNC) is a graphical desktop-sharing system that uses the Remote Frame Buffer protocol (RFB) to remotely control another computer.
+

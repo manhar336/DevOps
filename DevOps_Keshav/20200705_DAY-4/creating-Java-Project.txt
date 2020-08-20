@@ -1,0 +1,77 @@
+
+Our Requirement : 
+
+   Epic  - Web Application 
+        - Java 1.8 (Server Side Programming Language)
+        - Maven 3.5.4 (Build Tool)
+        - Spring Boot 2.3.1 : Is an open Source Java-Based framework used to create a Micro Service.
+            - Spring Boot contains a comprehensive infrastructure support for 
+            developing a micro service and enables you to develop enterprise-ready applications that you can just run. 
+            we are using spring boot for creating web Application
+        - Dependencies :
+            1. Sping Web : Apache Tomcat Server Container 
+            2. Thymeleaf : Template Engine for HTML 
+
+1. Create Java Project :(creating meta data)
+
+STEP-1 : Go to start.spring.io : https://start.spring.io/
+
+STEP-2 : Fill the required fields and create a Skelton of the Project 
+
+STEP-3 : And open the project in IDEL i.e. Eclipse, IntelliJ , VS Code, etc...
+
+STEP-4 : Working on the project :
+        - Server Side Coding : Java 
+        - Client Side Coding : HTML, CSS, JS, XML, 
+        - DB Scripts / DB Configuration 
+
+Board for Developers :
+
+Jira Borad :
+- Story : 1. Create a Skelton of the project 
+- Story : 2. Start working on HOME page 
+- Story : 3. Create Application Logic
+- Story : 4. Create DB configuration files 
+
+
+if the Developers are working on the code :
+
+- Snapshot Version 
+
+1.0.0 or 0.0.1 
+
+1 : Major 
+0 : Minor 
+0 : Patch 
+
+Jenkins job : Snapshot : dev environment  
+
+Maven Build Phases
+Maven build lifecycle goes through a set of stages, they are called build phases. For example, the default lifecycle is made up of the following phases.
+
+1. validate
+2. compile
+3. test
+4. package
+5. verify
+6. install
+7. deploy
+
+# mvn clean package deploy 
+(Clean, Validate, Compile, Test, Install, Verify and Package(.jar or .war) & 
+deploy(Artifactory i.e. Nexus/Jfrog/S3 bucket etc...))
+
+.jar or .war file unto 
+
+Continuous Integration & Continous Delivery --> Artifactory
+
+Jenkins Job : Snapshot : tst environment
+
+Jenkins job : Release :
+    
+Jenkins job : Deployment ---> dev / tst / acc /prd 
+
+    - acceptance [Business & Ops Teams]
+    
+    - production (actual production)
+

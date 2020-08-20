@@ -1,0 +1,379 @@
+Last login: Sun Aug 16 07:58:31 on ttys000
+cloudbinary@Clouds-MacBook-Pro Downloads % ssh -i "tm_aws_ohio_keys.pem" ubuntu@ec2-18-219-142-236.us-east-2.compute.amazonaws.com
+The authenticity of host 'ec2-18-219-142-236.us-east-2.compute.amazonaws.com (18.219.142.236)' can't be established.
+ECDSA key fingerprint is SHA256:aKpfBucVqO8ow5q/oQ2Bv3hv0GVuxfk4cwmrrMtDNog.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-219-142-236.us-east-2.compute.amazonaws.com,18.219.142.236' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 5.3.0-1032-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun Aug 16 03:05:16 UTC 2020
+
+  System load:  0.61              Processes:              119
+  Usage of /:   6.8% of 29.02GB   Users logged in:        0
+  Memory usage: 7%                IP address for eth0:    172.31.46.9
+  Swap usage:   0%                IP address for docker0: 172.17.0.1
+
+2 packages can be updated.
+2 updates are security updates.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-46-9:~$ sudo hostnamectl set-hostname "node1.codewithkesav.com"
+ubuntu@ip-172-31-46-9:~$ /bin/bash
+ubuntu@node1:~$ hostname
+node1.codewithkesav.com
+ubuntu@node1:~$ hostname -I
+172.31.46.9 172.17.0.1 
+ubuntu@node1:~$ sudo vi /etc/hosts
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ pwd
+/home/ubuntu
+ubuntu@node1:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu@node1:~$ 
+ubuntu@node1:~$ sudo systemctl status docker.service
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2020-08-16 03:04:09 UTC; 3min 58s ago
+     Docs: https://docs.docker.com
+ Main PID: 4109 (dockerd)
+    Tasks: 10
+   CGroup: /system.slice/docker.service
+           └─4109 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Aug 16 03:04:06 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:06.338837304Z" level=warning msg="Your kernel does not support cgroup rt r
+Aug 16 03:04:06 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:06.338926769Z" level=warning msg="Your kernel does not support cgroup blki
+Aug 16 03:04:06 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:06.339033757Z" level=warning msg="Your kernel does not support cgroup blki
+Aug 16 03:04:06 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:06.339300602Z" level=info msg="Loading containers: start."
+Aug 16 03:04:06 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:06.459485749Z" level=info msg="Default bridge (docker0) is assigned with a
+Aug 16 03:04:06 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:06.507672215Z" level=info msg="Loading containers: done."
+Aug 16 03:04:09 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:09.043303172Z" level=info msg="Docker daemon" commit=369ce74a3c graphdrive
+Aug 16 03:04:09 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:09.043432324Z" level=info msg="Daemon has completed initialization"
+Aug 16 03:04:09 ip-172-31-46-9 systemd[1]: Started Docker Application Container Engine.
+Aug 16 03:04:09 ip-172-31-46-9 dockerd[4109]: time="2020-08-16T03:04:09.073925990Z" level=info msg="API listen on /var/run/docker.sock"
+ubuntu@node1:~$ 
+ubuntu@node1:~$ cat /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+ubuntu@node1:~$ # kubelet kubeadm kubectl
+ubuntu@node1:~$ kubelet 
+F0816 03:08:43.135555    6427 server.go:254] mkdir /var/lib/kubelet: permission denied
+ubuntu@node1:~$ kubeadm --version
+unknown flag: --version
+To see the stack trace of this error execute with --v=5 or higher
+ubuntu@node1:~$ kube
+kubeadm  kubectl  kubelet  
+ubuntu@node1:~$ top
+
+
+
+
+
+
+top - 03:29:41 up 26 min,  1 user,  load average: 0.00, 0.01, 0.03
+Tasks: 106 total,   1 running,  58 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  4028392 total,  2378080 free,   208108 used,  1442204 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3582856 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                   
+ 2627 root      20   0  813040  41104  23888 S   0.3  1.0   0:05.13 containerd                                                                
+ 7109 ubuntu    20   0   44536   3988   3328 R   0.3  0.1   0:01.29 top                                                                       
+    1 root      20   0  159932   9188   6708 S   0.0  0.2   0:04.08 systemd                                                                   
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                  
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_gp                                                                    
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_par_gp                                                                
+    5 root      20   0       0      0      0 I   0.0  0.0   0:00.06 kworker/0:0-eve                                                           
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H-kb                                                           
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                                                              
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.07 ksoftirqd/0                                                               
+   11 root      20   0       0      0      0 I   0.0  0.0   0:00.13 rcu_sched                                                                 
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.00 migration/0                                                               
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                                                                   
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                                                                   
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.27 migration/1                                                               
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.06 ksoftirqd/1                                                               
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H-kb                                                           
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                 
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                                                                     
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_tasks_kthre                                                           
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kauditd                                                                   
+   23 root      20   0       0      0      0 S   0.0  0.0   0:00.00 xenbus                                                                    
+   24 root      20   0       0      0      0 S   0.0  0.0   0:00.02 xenwatch                                                                  
+   25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                                                                
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper                                                                
+   27 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 writeback                                                                 
+   28 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kcompactd0                                                                
+   29 root      25   5       0      0      0 S   0.0  0.0   0:00.00 ksmd                                                                      
+   30 root      39  19       0      0      0 S   0.0  0.0   0:00.00 khugepaged                                                                
+   76 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kintegrityd                                                               
+   77 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kblockd                                                                   
+   78 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 blkcg_punt_bio                                                            
+   80 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 tpm_dev_wq                                                                
+   81 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 ata_sff                                                                   
+   82 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 md                                                                        
+   83 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 edac-poller                                                               
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ sudo kubeadm join 172.31.35.77:6443 --token 0cbzuz.wsehymkln2lqz9q7 --discovery-token-ca-cert-hash sha256:525a8745984d4d1e816cae7e5fb0123ca521f3781016c15f5bacee3acd1f2979 
+W0816 03:30:04.106965   10865 join.go:346] [preflight] WARNING: JoinControlPane.controlPlane settings will be ignored when control-plane flag is not set.
+[preflight] Running pre-flight checks
+	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[kubelet-start] Downloading configuration for the kubelet from the "kubelet-config-1.18" ConfigMap in the kube-system namespace
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+ubuntu@node1:~$ kubectl get nodes
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+ubuntu@node1:~$ 
+ubuntu@node1:~$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy    v1.18.8             0fb7201f92d0        2 days ago          117MB
+quay.io/coreos/flannel   v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause         3.2                 80d28bedfe5d        6 months ago        683kB
+ubuntu@node1:~$ docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED              STATUS              PORTS               NAMES
+3096f0b08728        4e9f801d2217            "/opt/bin/flanneld -…"   About a minute ago   Up About a minute                       k8s_kube-flannel_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+a24d9957af2f        k8s.gcr.io/kube-proxy   "/usr/local/bin/kube…"   About a minute ago   Up About a minute                       k8s_kube-proxy_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+41d1d449f0f7        k8s.gcr.io/pause:3.2    "/pause"                 About a minute ago   Up About a minute                       k8s_POD_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+f360de9e4c15        k8s.gcr.io/pause:3.2    "/pause"                 About a minute ago   Up About a minute                       k8s_POD_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+ubuntu@node1:~$ 
+ubuntu@node1:~$ top
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+top - 03:39:36 up 36 min,  1 user,  load average: 0.00, 0.07, 0.08
+Tasks: 120 total,   1 running,  72 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.8 us,  0.3 sy,  0.0 ni, 98.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  4028392 total,  1956020 free,   295820 used,  1776552 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3484244 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                   
+10979 root      20   0 1337148  85780  62624 S   1.3  2.1   0:07.18 kubelet                                                                   
+ 4109 root      20   0 1130532 108292  49380 S   0.7  2.7   0:07.70 dockerd                                                                   
+ 2627 root      20   0 1184040  43156  24044 S   0.3  1.1   0:06.27 containerd                                                                
+11812 root      20   0  251696  30224  22592 S   0.3  0.8   0:00.45 flanneld                                                                  
+    1 root      20   0  159932   9196   6708 S   0.0  0.2   0:04.27 systemd                                                                   
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                  
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_gp                                                                    
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_par_gp                                                                
+    5 root      20   0       0      0      0 I   0.0  0.0   0:00.10 kworker/0:0-eve                                                           
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H-kb                                                           
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                                                              
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.09 ksoftirqd/0                                                               
+   11 root      20   0       0      0      0 I   0.0  0.0   0:00.22 rcu_sched                                                                 
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.01 migration/0                                                               
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                                                                   
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                                                                   
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.28 migration/1                                                               
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.07 ksoftirqd/1                                                               
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H-kb                                                           
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                 
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                                                                     
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_tasks_kthre                                                           
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kauditd                                                                   
+   23 root      20   0       0      0      0 S   0.0  0.0   0:00.00 xenbus                                                                    
+   24 root      20   0       0      0      0 S   0.0  0.0   0:00.02 xenwatch                                                                  
+   25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                                                                
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper                                                                
+   27 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 writeback                                                                 
+   28 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kcompactd0                                                                
+   29 root      25   5       0      0      0 S   0.0  0.0   0:00.00 ksmd                                                                      
+   30 root      39  19       0      0      0 S   0.0  0.0   0:00.00 khugepaged                                                                
+   76 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kintegrityd                                                               
+   77 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kblockd                                                                   
+   78 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 blkcg_punt_bio                                                            
+   80 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 tpm_dev_wq                                                                
+   81 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 ata_sff                                                                   
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy    v1.18.8             0fb7201f92d0        2 days ago          117MB
+quay.io/coreos/flannel   v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause         3.2                 80d28bedfe5d        6 months ago        683kB
+nginx                    1.14.2              295c7be07902        16 months ago       109MB
+ubuntu@node1:~$ docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED              STATUS              PORTS               NAMES
+7ff938f90dbc        nginx                   "nginx -g 'daemon of…"   About a minute ago   Up About a minute                       k8s_nginx_nginx-deployment-6b474476c4-crzxh_default_102bffda-2a36-436c-a06d-39fc973e723e_0
+1f4634b2ee48        k8s.gcr.io/pause:3.2    "/pause"                 About a minute ago   Up About a minute                       k8s_POD_nginx-deployment-6b474476c4-crzxh_default_102bffda-2a36-436c-a06d-39fc973e723e_0
+3096f0b08728        4e9f801d2217            "/opt/bin/flanneld -…"   9 minutes ago        Up 9 minutes                            k8s_kube-flannel_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+a24d9957af2f        k8s.gcr.io/kube-proxy   "/usr/local/bin/kube…"   9 minutes ago        Up 9 minutes                            k8s_kube-proxy_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+41d1d449f0f7        k8s.gcr.io/pause:3.2    "/pause"                 9 minutes ago        Up 9 minutes                            k8s_POD_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+f360de9e4c15        k8s.gcr.io/pause:3.2    "/pause"                 9 minutes ago        Up 9 minutes                            k8s_POD_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ top
+
+top - 03:46:36 up 43 min,  1 user,  load average: 0.00, 0.01, 0.04
+Tasks: 116 total,   1 running,  72 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.3 us,  0.5 sy,  0.0 ni, 99.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.2 st
+KiB Mem :  4028392 total,  1956872 free,   294948 used,  1776572 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3485472 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                   
+10979 root      20   0 1337404  86340  62624 S   1.3  2.1   0:12.27 kubelet                                                                   
+   11 root      20   0       0      0      0 I   0.3  0.0   0:00.29 rcu_sched                                                                 
+ 2627 root      20   0 1184040  42068  24044 S   0.3  1.0   0:07.06 containerd                                                                
+ 4109 root      20   0 1130532 108292  49380 S   0.3  2.7   0:09.86 dockerd                                                                   
+    1 root      20   0  159932   9196   6708 S   0.0  0.2   0:04.28 systemd                                                                   
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                  
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_gp                                                                    
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_par_gp                                                                
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H-kb                                                           
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                                                              
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.10 ksoftirqd/0                                                               
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.01 migration/0                                                               
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                                                                   
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                                                                   
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.28 migration/1                                                               
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.07 ksoftirqd/1                                                               
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H-kb                                                           
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                 
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                                                                     
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_tasks_kthre                                                           
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kauditd                                                                   
+   23 root      20   0       0      0      0 S   0.0  0.0   0:00.00 xenbus                                                                    
+   24 root      20   0       0      0      0 S   0.0  0.0   0:00.02 xenwatch                                                                  
+   25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                                                                
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper                                                                
+   27 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 writeback                                                                 
+   28 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kcompactd0                                                                
+   29 root      25   5       0      0      0 S   0.0  0.0   0:00.00 ksmd                                                                      
+   30 root      39  19       0      0      0 S   0.0  0.0   0:00.00 khugepaged                                                                
+   76 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kintegrityd                                                               
+   77 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kblockd                                                                   
+   78 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 blkcg_punt_bio                                                            
+   80 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 tpm_dev_wq                                                                
+   81 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 ata_sff                                                                   
+   82 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 md                                                                        
+   83 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 edac-poller                                                               
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ sudo systemctl status kubectl.service
+Unit kubectl.service could not be found.
+ubuntu@node1:~$ top
+
+top - 03:52:19 up 49 min,  1 user,  load average: 0.00, 0.03, 0.03
+Tasks: 116 total,   2 running,  67 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.5 us,  0.3 sy,  0.0 ni, 99.2 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  4028392 total,  1957396 free,   294656 used,  1776340 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.  3486296 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                   
+10979 root      20   0 1337404  86884  63008 S   1.3  2.2   0:16.23 kubelet                                                                   
+ 4109 root      20   0 1130788 108332  49380 S   0.7  2.7   0:11.39 dockerd                                                                   
+ 2627 root      20   0 1184040  43076  24044 S   0.3  1.1   0:07.75 containerd                                                                
+18563 root      20   0       0      0      0 I   0.3  0.0   0:00.02 kworker/1:1-eve                                                           
+18964 ubuntu    20   0   44536   3940   3332 R   0.3  0.1   0:00.30 top                                                                       
+    1 root      20   0  159932   9196   6708 S   0.0  0.2   0:04.29 systemd                                                                   
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                                                                  
+    3 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_gp                                                                    
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 rcu_par_gp                                                                
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H-kb                                                           
+    9 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                                                              
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.10 ksoftirqd/0                                                               
+   11 root      20   0       0      0      0 I   0.0  0.0   0:00.34 rcu_sched                                                                 
+   12 root      rt   0       0      0      0 S   0.0  0.0   0:00.01 migration/0                                                               
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                                                                   
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                                                                   
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.28 migration/1                                                               
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.07 ksoftirqd/1                                                               
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H-kb                                                           
+   19 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                                                                 
+   20 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                                                                     
+   21 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_tasks_kthre                                                           
+   22 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kauditd                                                                   
+   23 root      20   0       0      0      0 S   0.0  0.0   0:00.00 xenbus                                                                    
+   24 root      20   0       0      0      0 S   0.0  0.0   0:00.02 xenwatch                                                                  
+   25 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                                                                
+   26 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper                                                                
+   27 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 writeback                                                                 
+   28 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kcompactd0                                                                
+   29 root      25   5       0      0      0 S   0.0  0.0   0:00.00 ksmd                                                                      
+   30 root      39  19       0      0      0 S   0.0  0.0   0:00.00 khugepaged                                                                
+   76 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kintegrityd                                                               
+   77 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kblockd                                                                   
+   78 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 blkcg_punt_bio                                                            
+   80 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 tpm_dev_wq                                                                
+   81 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 ata_sff                                                                   
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy    v1.18.8             0fb7201f92d0        2 days ago          117MB
+quay.io/coreos/flannel   v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause         3.2                 80d28bedfe5d        6 months ago        683kB
+nginx                    1.14.2              295c7be07902        16 months ago       109MB
+ubuntu@node1:~$ docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS               NAMES
+3096f0b08728        4e9f801d2217            "/opt/bin/flanneld -…"   22 minutes ago      Up 22 minutes                           k8s_kube-flannel_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+a24d9957af2f        k8s.gcr.io/kube-proxy   "/usr/local/bin/kube…"   22 minutes ago      Up 22 minutes                           k8s_kube-proxy_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+41d1d449f0f7        k8s.gcr.io/pause:3.2    "/pause"                 22 minutes ago      Up 22 minutes                           k8s_POD_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+f360de9e4c15        k8s.gcr.io/pause:3.2    "/pause"                 22 minutes ago      Up 22 minutes                           k8s_POD_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ 
+ubuntu@node1:~$ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy    v1.18.8             0fb7201f92d0        2 days ago          117MB
+quay.io/coreos/flannel   v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause         3.2                 80d28bedfe5d        6 months ago        683kB
+nginx                    1.14.2              295c7be07902        16 months ago       109MB
+ubuntu@node1:~$ docker ps
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS               NAMES
+3096f0b08728        4e9f801d2217            "/opt/bin/flanneld -…"   25 minutes ago      Up 25 minutes                           k8s_kube-flannel_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0
+a24d9957af2f        k8s.gcr.io/kube-proxy   "/usr/local/bin/kube…"   25 minutes ago      Up 25 minutes                           k8s_kube-proxy_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+41d1d449f0f7        k8s.gcr.io/pause:3.2    "/pause"                 25 minutes ago      Up 25 minutes                           k8s_POD_kube-proxy-f2m4m_kube-system_1054fb27-84cb-4766-a846-5124456a3bcf_0
+f360de9e4c15        k8s.gcr.io/pause:3.2    "/pause"                 25 minutes ago      Up 25 minutes                           k8s_POD_kube-flannel-ds-amd64-b9rrg_kube-system_e8d9975a-9445-4c33-9900-f95e3eefee36_0

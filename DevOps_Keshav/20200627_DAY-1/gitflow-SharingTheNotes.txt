@@ -1,0 +1,23 @@
+
+
+How I share the Notes ?
+
+STEP-1 : Using Version Control System i.e. Gitlab 
+
+        - register with gitlab (GUI Version Control System)
+
+STEP-2 : Create a Folder/Directory/Repository
+
+        - devops_20200627
+
+STEP-3 : Go to your local machine i.e. Windows or MacOS or Linux 
+
+        - Download, Install & Configure CLI/CUI version control system vendor i.e. git 
+
+STEP-4 : Clone or Download Online Folder/Directory/Repository i.e. devops_20200627
+
+STEP-5 : Open the repository i.e. devops_20200627 part of IDE Tool(Visual Studio Code)
+
+STEP-6 : Execute git commands to create your branch 
+
+STEP-7 : Everyday fetch & pull changes from master branch to your branch 

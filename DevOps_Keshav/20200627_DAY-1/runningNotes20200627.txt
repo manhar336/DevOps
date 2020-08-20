@@ -1,0 +1,30 @@
+DAY-1 : https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200627_DAY-1/zoom_0.mp4
+
+Agenda :
+
+1. Introduction
+
+2. Course Introduction
+
+3. What is DevOps ?
+
+4. What is SDLC ?
+
+5. Getting Started with required tools :
+
+    1. Cloud Computing : i.e. AWS  : https://aws.amazon.com/free/
+    2. Git  : https://git-scm.com/
+    3. IDE : Visual Studio Code : https://code.visualstudio.com/download
+    4. AWS CLI : https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
+    5. Virtualbox : https://www.virtualbox.org/
+    6. Gitlab : https://about.gitlab.com/
+    7. Download ISO files i.e. Linux Distributions : 
+        - CentOS 7 : http://isoredirect.centos.org/centos/7/isos/x86_64/
+        - Ubuntu 18.04 : https://ubuntu.com/download/desktop
+    8. Agile Scrum Board : https://trello.com/  & https://www.atlassian.com/software/jira
+    9. DevOps Tools :  https://digital.ai/periodic-table-of-devops-tools
+    10. https://www.scrum.org/
+    
+
+6. Basics of Linux/Unix 
+

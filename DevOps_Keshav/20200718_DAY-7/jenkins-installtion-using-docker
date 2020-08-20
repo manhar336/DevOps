@@ -1,0 +1,34 @@
+1. root@codewith:~# docker pull jenkins
+Using default tag: latest
+latest: Pulling from library/jenkins
+55cbf04beb70: Pull complete 
+1607093a898c: Pull complete 
+9a8ea045c926: Pull complete 
+d4eee24d4dac: Pull complete 
+c58988e753d7: Pull complete 
+794a04897db9: Pull complete 
+70fcfa476f73: Pull complete 
+0539c80a02be: Pull complete 
+54fefc6dcf80: Pull complete 
+911bc90e47a8: Pull complete 
+38430d93efed: Pull complete 
+7e46ccda148a: Pull complete 
+c0cbcb5ac747: Pull complete 
+35ade7a86a8e: Pull complete 
+aa433a6a56b1: Pull complete 
+841c1dd38d62: Pull complete 
+b865dcb08714: Pull complete 
+5a3779030005: Pull complete 
+12b47c68955c: Pull complete 
+1322ea3e7bfd: Pull complete 
+Digest: sha256:eeb4850eb65f2d92500e421b430ed1ec58a7ac909e91f518926e02473904f668
+Status: Downloaded newer image for jenkins:latest
+docker.io/library/jenkins:latest
+root@codewith:~# 
+
+2. root@codewith:~# docker run -d --name "codewith.manohar.com" -p 8080:8080 jenkins:latest
+4e763dc57557c7543b67502181ab103bb20a8ad6165e0561286992602c906756
+root@codewith:~# 
+
+Note -d means detach mode,"codewith.manohar.com" --name of the container -p means port no, jenkins:latest --name of the image 
+  In above command Jenkins image running as container

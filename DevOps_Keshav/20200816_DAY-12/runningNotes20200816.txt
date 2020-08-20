@@ -1,0 +1,30 @@
+DAY-12 : https://s3.amazonaws.com/cloudbinary.io/devops_weekend/20200816_DAY-12/zoom_0.mp4
+
+Agenda :
+
+k8s setup and deployment
+
+
+
+Certification on DevOps :
+
+- Cloud : AWS  :    Certified Solutions Architect Associate 
+
+- Cloud DevOps Certification : AWS Certified DevOps Engineer 
+
+- Docker 
+
+- Kubernetes
+
+- Terraform 
+
+Programming Language : 
+- Python 
+
+10 + years in 80 Lakhs Per Annum  | 1,50,000 USD per Annum
+
+Company : AWS Practice | DevOps Practice | Azure Practice | GCP Practice 
+
+Next Python : 20th Aug 2020 @ 7am IST - Monday to Friday 
+
+Next AWS Certified DevOps Engineer  : 

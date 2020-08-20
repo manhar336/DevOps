@@ -1,0 +1,74 @@
+Last login: Sat Jul 11 18:43:29 on ttys000
+cloudbinary@Clouds-MacBook-Pro Downloads % pwd
+/Users/cloudbinary/Downloads
+cloudbinary@Clouds-MacBook-Pro Downloads % ssh -i "northvirginia_aws_key.pem" ubuntu@ec2-3-237-21-184.compute-1.amazonaws.com
+The authenticity of host 'ec2-3-237-21-184.compute-1.amazonaws.com (3.237.21.184)' can't be established.
+ECDSA key fingerprint is SHA256:fNG31RVpgHFEOopAU1S3/f7w5YXTWUx9+0aj/dcfiYs.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-3-237-21-184.compute-1.amazonaws.com,3.237.21.184' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 5.3.0-1023-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sun Jul 12 04:01:47 UTC 2020
+
+  System load:  0.13              Processes:           111
+  Usage of /:   8.6% of 19.32GB   Users logged in:     0
+  Memory usage: 5%                IP address for eth0: 172.31.78.115
+  Swap usage:   0%
+
+ * "If you've been waiting for the perfect Kubernetes dev solution for
+   macOS, the wait is over. Learn how to install Microk8s on macOS."
+
+   https://www.techrepublic.com/article/how-to-install-microk8s-on-macos/
+
+25 packages can be updated.
+17 updates are security updates.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-78-115:~$ sudo hostnamectl set-hostname "jfrog.codewithkesav.com"
+ubuntu@ip-172-31-78-115:~$ /bin/bash
+ubuntu@jfrog:~$ hostname
+jfrog.codewithkesav.com
+ubuntu@jfrog:~$ hostname -I
+172.31.78.115 
+ubuntu@jfrog:~$ 
+ubuntu@jfrog:~$ cat /etc/hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+ubuntu@jfrog:~$ # 172.31.78.115 jfrog.codewithkesav.com
+ubuntu@jfrog:~$ 
+ubuntu@jfrog:~$ sudo vi /etc/hosts
+ubuntu@jfrog:~$ cat /etc/hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+172.31.78.115 jfrog.codewithkesav.com
+ubuntu@jfrog:~$ 

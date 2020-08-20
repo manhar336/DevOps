@@ -1,0 +1,277 @@
+
+
+# Kubernetes Master
+172.31.35.77 master.codewithkesav.com
+
+# Kubernetes Node-1
+172.31.46.9 node1.codewithkesav.com
+
+# Kubernetes Node-2
+172.31.40.106 node2.codewithkesav.com
+
+
+sudo hostnamectl set-hostname "master.codewithkesav.com"
+
+sudo hostnamectl set-hostname "node1.codewithkesav.com"
+
+sudo hostnamectl set-hostname "node2.codewithkesav.com"
+
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.44.101:6443 --token 1vxdq8.godjtg58kvl74e31 --discovery-token-ca-cert-hash sha256:1f66b5de3ceae6c026272ae22bce352a42e83379b11ba71526d8a07808a126fa 
+
+
+On Master :
+
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+Then, go to Nodes-1 :
+sudo kubeadm join 172.31.44.101:6443 --token 1vxdq8.godjtg58kvl74e31 --discovery-token-ca-cert-hash sha256:1f66b5de3ceae6c026272ae22bce352a42e83379b11ba71526d8a07808a126fa 
+
+Then, go to Nodes-2 :
+sudo kubeadm join 172.31.44.101:6443 --token 1vxdq8.godjtg58kvl74e31 --discovery-token-ca-cert-hash sha256:1f66b5de3ceae6c026272ae22bce352a42e83379b11ba71526d8a07808a126fa 
+
+
+
+Last login: Sat Aug 15 19:02:59 on ttys006
+cloudbinary@Clouds-MacBook-Pro Downloads % ssh -i "tm_aws_ohio_keys.pem" ubuntu@ec2-3-19-71-197.us-east-2.compute.amazonaws.com
+Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 5.3.0-1032-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Aug 15 14:13:28 UTC 2020
+
+  System load:  0.24              Users logged in:        1
+  Usage of /:   9.6% of 29.02GB   IP address for eth0:    172.31.44.101
+  Memory usage: 21%               IP address for docker0: 172.17.0.1
+  Swap usage:   0%                IP address for cni0:    10.244.0.1
+  Processes:    139
+
+
+2 packages can be updated.
+2 updates are security updates.
+
+
+Last login: Sat Aug 15 12:44:12 2020 from 183.83.173.227
+ubuntu@k8s-master:~$ sudo kubectl create deployment nginx --image=nginx
+Error from server (AlreadyExists): deployments.apps "nginx" already exists
+ubuntu@k8s-master:~$ docker images
+REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
+k8s.gcr.io/kube-proxy                v1.18.8             0fb7201f92d0        45 hours ago        117MB
+k8s.gcr.io/kube-apiserver            v1.18.8             92d040a0dca7        45 hours ago        173MB
+k8s.gcr.io/kube-controller-manager   v1.18.8             6a979351fe5e        45 hours ago        162MB
+k8s.gcr.io/kube-scheduler            v1.18.8             6f7135fb47e0        45 hours ago        95.3MB
+quay.io/coreos/flannel               v0.12.0-amd64       4e9f801d2217        5 months ago        52.8MB
+k8s.gcr.io/pause                     3.2                 80d28bedfe5d        6 months ago        683kB
+k8s.gcr.io/coredns                   1.6.7               67da37a9a360        6 months ago        43.8MB
+k8s.gcr.io/etcd                      3.4.3-0             303ce5db0e90        9 months ago        288MB
+ubuntu@k8s-master:~$ docker ps
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS              PORTS               NAMES
+249a70c84dc0        67da37a9a360           "/coredns -conf /etc…"   37 minutes ago      Up 37 minutes                           k8s_coredns_coredns-66bff467f8-pn5pq_kube-system_e8a568bd-0e91-49a2-b591-fdac30c040e3_0
+492215e325eb        67da37a9a360           "/coredns -conf /etc…"   37 minutes ago      Up 37 minutes                           k8s_coredns_coredns-66bff467f8-b26np_kube-system_3a818e10-3208-46e0-a06b-82bd8423cec0_0
+f3579262dcef        k8s.gcr.io/pause:3.2   "/pause"                 37 minutes ago      Up 37 minutes                           k8s_POD_coredns-66bff467f8-b26np_kube-system_3a818e10-3208-46e0-a06b-82bd8423cec0_0
+b2e270234975        k8s.gcr.io/pause:3.2   "/pause"                 37 minutes ago      Up 37 minutes                           k8s_POD_coredns-66bff467f8-pn5pq_kube-system_e8a568bd-0e91-49a2-b591-fdac30c040e3_0
+9c3ed17c0389        4e9f801d2217           "/opt/bin/flanneld -…"   37 minutes ago      Up 37 minutes                           k8s_kube-flannel_kube-flannel-ds-amd64-ffcmq_kube-system_e6ffd7b0-9ef1-4290-ba97-578f0b2af40b_0
+df02dbd91acf        k8s.gcr.io/pause:3.2   "/pause"                 37 minutes ago      Up 37 minutes                           k8s_POD_kube-flannel-ds-amd64-ffcmq_kube-system_e6ffd7b0-9ef1-4290-ba97-578f0b2af40b_0
+e628ca381309        0fb7201f92d0           "/usr/local/bin/kube…"   About an hour ago   Up About an hour                        k8s_kube-proxy_kube-proxy-tbxh6_kube-system_539514dd-8304-413d-8b49-8f915d4cde02_0
+a13c492e22e5        k8s.gcr.io/pause:3.2   "/pause"                 About an hour ago   Up About an hour                        k8s_POD_kube-proxy-tbxh6_kube-system_539514dd-8304-413d-8b49-8f915d4cde02_0
+a39769c7445e        92d040a0dca7           "kube-apiserver --ad…"   About an hour ago   Up About an hour                        k8s_kube-apiserver_kube-apiserver-k8s-master.codewithkesav.com_kube-system_8bf05c15d23c110eb20e3656f40dea78_0
+4a0cd8819470        6f7135fb47e0           "kube-scheduler --au…"   About an hour ago   Up About an hour                        k8s_kube-scheduler_kube-scheduler-k8s-master.codewithkesav.com_kube-system_c808ba8a724ff4e00643b5c4f7fc454b_0
+50dc819d5548        6a979351fe5e           "kube-controller-man…"   About an hour ago   Up About an hour                        k8s_kube-controller-manager_kube-controller-manager-k8s-master.codewithkesav.com_kube-system_a67e89140d05fa486673d78254804620_0
+93c8b76fbe96        303ce5db0e90           "etcd --advertise-cl…"   About an hour ago   Up About an hour                        k8s_etcd_etcd-k8s-master.codewithkesav.com_kube-system_50ad7ad62afed4ef9ae3b1d3bb61dbcb_0
+53047391fc37        k8s.gcr.io/pause:3.2   "/pause"                 About an hour ago   Up About an hour                        k8s_POD_kube-scheduler-k8s-master.codewithkesav.com_kube-system_c808ba8a724ff4e00643b5c4f7fc454b_0
+97a7d5ebbe6d        k8s.gcr.io/pause:3.2   "/pause"                 About an hour ago   Up About an hour                        k8s_POD_kube-controller-manager-k8s-master.codewithkesav.com_kube-system_a67e89140d05fa486673d78254804620_0
+c57f4c3f2b96        k8s.gcr.io/pause:3.2   "/pause"                 About an hour ago   Up About an hour                        k8s_POD_kube-apiserver-k8s-master.codewithkesav.com_kube-system_8bf05c15d23c110eb20e3656f40dea78_0
+02c428f6d004        k8s.gcr.io/pause:3.2   "/pause"                 About an hour ago   Up About an hour                        k8s_POD_etcd-k8s-master.codewithkesav.com_kube-system_50ad7ad62afed4ef9ae3b1d3bb61dbcb_0
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ kubectl get nodes
+NAME                           STATUS   ROLES    AGE   VERSION
+k8s-master.codewithkesav.com   Ready    master   61m   v1.18.8
+k8s-node1.codewithkesav.com    Ready    <none>   25m   v1.18.8
+k8s-node2.codewithkesav.com    Ready    <none>   23m   v1.18.8
+ubuntu@k8s-master:~$ kubectl get pods --namespaces
+Error: unknown flag: --namespaces
+See 'kubectl get --help' for usage.
+ubuntu@k8s-master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   61m
+ubuntu@k8s-master:~$ sudo kubectl create deployment nginx --image=nginx
+Error from server (AlreadyExists): deployments.apps "nginx" already exists
+ubuntu@k8s-master:~$ sudo kubectl create service nodeport nginx --tcp=80:80
+service/nginx created
+ubuntu@k8s-master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        62m
+nginx        NodePort    10.111.151.55   <none>        80:30855/TCP   4s
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ # curl kubernetes3:30655
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ kubectl get svc
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP        63m
+nginx        NodePort    10.111.151.55   <none>        80:30855/TCP   47s
+ubuntu@k8s-master:~$ kubectl get nodes
+NAME                           STATUS   ROLES    AGE   VERSION
+k8s-master.codewithkesav.com   Ready    master   63m   v1.18.8
+k8s-node1.codewithkesav.com    Ready    <none>   26m   v1.18.8
+k8s-node2.codewithkesav.com    Ready    <none>   25m   v1.18.8
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ curl k8s-node2.codewithkesav.com:30655
+curl: (7) Failed to connect to k8s-node2.codewithkesav.com port 30655: Connection refused
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ curl k8s-node2.codewithkesav.com:30855
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+nginx-f89759699   1         1         1       12m
+ubuntu@k8s-master:~$ kubectl describe deployments
+Name:                   nginx
+Namespace:              default
+CreationTimestamp:      Sat, 15 Aug 2020 14:12:39 +0000
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=nginx
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-f89759699 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  13m   deployment-controller  Scaled up replica set nginx-f89759699 to 1
+ubuntu@k8s-master:~$ kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-f89759699-n5rj6   1/1     Running   0          13m
+ubuntu@k8s-master:~$ kubectl describe deployment
+Name:                   nginx
+Namespace:              default
+CreationTimestamp:      Sat, 15 Aug 2020 14:12:39 +0000
+Labels:                 app=nginx
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=nginx
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-f89759699 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  13m   deployment-controller  Scaled up replica set nginx-f89759699 to 1
+ubuntu@k8s-master:~$ kubectl scale deployment.v1.apps/nginx-deployment --replicas=3
+Error from server (NotFound): deployments.apps "nginx-deployment" not found
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ kubectl scale deployment apps/nginx-deployment --replicas=3
+error: there is no need to specify a resource type as a separate argument when passing arguments in resource/name form (e.g. 'kubectl get resource/<resource_name>' instead of 'kubectl get resource resource/<resource_name>'
+ubuntu@k8s-master:~$ 
+ubuntu@k8s-master:~$ kubectl get pods
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-f89759699-n5rj6   1/1     Running   0          16m
+ubuntu@k8s-master:~$ kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+nginx-f89759699   1         1         1       16m
+ubuntu@k8s-master:~$ history
+    1  sudo kubectl create deployment nginx --image=nginx
+    2  docker images
+    3  docker ps
+    4  kubectl get nodes
+    5  kubectl get pods --namespaces
+    6  kubectl get svc
+    7  sudo kubectl create deployment nginx --image=nginx
+    8  sudo kubectl create service nodeport nginx --tcp=80:80
+    9  kubectl get svc
+   10  # curl kubernetes3:30655
+   11  kubectl get svc
+   12  kubectl get nodes
+   13  curl k8s-node2.codewithkesav.com:30655
+   14  curl k8s-node2.codewithkesav.com:30855
+   15  kubectl get rs
+   16  kubectl describe deployments
+   17  kubectl get pods
+   18  kubectl describe deployment
+   19  kubectl scale deployment.v1.apps/nginx-deployment --replicas=3
+   20  kubectl scale deployment apps/nginx-deployment --replicas=3
+   21  kubectl get pods
+   22  kubectl get rs
+   23  history
+ubuntu@k8s-master:~$ kubectl scale deployment nginx --replicas=3
+deployment.apps/nginx scaled
+ubuntu@k8s-master:~$ kubectl get rs
+NAME              DESIRED   CURRENT   READY   AGE
+nginx-f89759699   3         3         2       17m
+ubuntu@k8s-master:~$ 
+

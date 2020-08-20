@@ -1,0 +1,208 @@
+
+Ubuntu :
+
+Package Mgmt : 
+apt
+or
+apt-get 
+
+apt-get install apache2 
+
+
+Services /Deamons Mgmt :(based on commands and distribution commands will change)
+
+service service_name action 
+
+service apache2 status 
+
+systemctl action service_name  (command wont work on older versions and will work only on newer versions)
+
+systemctl status apache2 
+
+Init Scripts :
+
+/etc/init.d/apache2 
+
+
+User : apache2 
+Group : apache2 
+
+ls -lrt /etc/apache2
+
+ls -lrt /var/www/
+
+CentOS :
+
+Package Mgmt : 
+
+yum 
+or 
+rpm (will work only for local)
+
+Services /Deamons Mgmt :
+
+service service_name action 
+
+systemctl action service_name
+
+
+
+Ubuntu18.04:
+1. sudo apt-get update
+   Hit:1 http://in.archive.ubuntu.com/ubuntu bionic InRelease 
+Hit:2 http://in.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:3 http://in.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Hit:4 http://in.archive.ubuntu.com/ubuntu bionic-security InRelease
+Reading package lists... Done
+
+2. apt-get install apache2(apache2 called as Deamons)
+
+3. root@continuousintegration:~# service apache2 status
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: active (running) since Tue 2020-07-07 16:12:13 UTC; 12min ago
+
+4. root@continuousintegration:~# systemctl status apache2
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: active (running) since Tue 2020-07-07 16:12:13 UTC; 12min ago
+5. systemctl enable apache2      (enable in boot level)
+6. chkconfig apache2 on(enable in boot level for old versions )
+7. ps -aux(it will execute all users with process including Deamons)
+    p:process  s:status  a:all  u:users  x:execution
+8. top command is task manager  
+9. ps -aux|grep -i apache2
+  root@continuousintegration:~# ps -aux|grep -i apache2
+root      1047  0.0  0.2  73960  2780 ?        Ss   16:12   0:00 /usr/sbin/apache2 -k start
+www-data  1048  0.0  0.2 826256  2740 ?        Sl   16:12   0:00 /usr/sbin/apache2 -k start
+www-data  1049  0.0  0.2 826256  2756 ?        Sl   16:12   0:00 /usr/sbin/apache2 -k start
+root      2492  0.0  0.1  13136  1060 pts/1    S+   16:39   0:00 grep --color=auto -i apache2
+root@continuousintegration:~# 
+
+9. root@continuousintegration:~# systemctl status apache2
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: active (running) since Tue 2020-07-07 16:12:13 UTC; 29min ago
+  Process: 994 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
+ Main PID: 1047 (apache2)
+    Tasks: 55 (limit: 1103)
+   CGroup: /system.slice/apache2.service
+           ├─1047 /usr/sbin/apache2 -k start
+           ├─1048 /usr/sbin/apache2 -k start
+           └─1049 /usr/sbin/apache2 -k start
+10.systemctl stop apache2
+11.systemctl start apache2
+12.systemctl status apache2
+13.grep -i "apache2" /etc/passwd /etc/gshadow /etc/group /etc/gshadow (user and group configuration management files)
+14.root@continuousintegration:~# grep -i "manohard" /etc/passwd /etc/gshadow /etc/group /etc/gshadow
+/etc/passwd:manohard:x:1000:1000:manohardharmala:/home/manohard:/bin/bash
+/etc/gshadow:adm:*::syslog,manohard
+/etc/gshadow:cdrom:*::manohard
+/etc/gshadow:sudo:*::manohard
+/etc/gshadow:dip:*::manohard
+/etc/gshadow:plugdev:*::manohard
+/etc/gshadow:lxd:!::manohard
+/etc/gshadow:manohard:!::
+/etc/group:adm:x:4:syslog,manohard
+/etc/group:cdrom:x:24:manohard
+/etc/group:sudo:x:27:manohard
+/etc/group:dip:x:30:manohard
+/etc/group:plugdev:x:46:manohard
+/etc/group:lxd:x:108:manohard
+/etc/group:manohard:x:1000:
+/etc/gshadow:adm:*::syslog,manohard
+/etc/gshadow:cdrom:*::manohard
+/etc/gshadow:sudo:*::manohard
+/etc/gshadow:dip:*::manohard
+/etc/gshadow:plugdev:*::manohard
+/etc/gshadow:lxd:!::manohard
+/etc/gshadow:manohard:!::
+root@continuousintegration:~# 
+
+15. root@continuousintegration:~# ls -ltr /etc/apache2/  (webserver configuration files)
+total 80
+-rw-r--r-- 1 root root   320 Jul 16  2019 ports.conf
+-rw-r--r-- 1 root root 31063 Jul 16  2019 magic
+-rw-r--r-- 1 root root  1782 Jul 16  2019 envvars
+-rw-r--r-- 1 root root  7224 Mar 13 12:26 apache2.conf
+drwxr-xr-x 2 root root  4096 Jul  7 11:33 conf-available
+drwxr-xr-x 2 root root 12288 Jul  7 11:33 mods-available
+drwxr-xr-x 2 root root  4096 Jul  7 11:33 sites-available
+drwxr-xr-x 2 root root  4096 Jul  7 11:33 mods-enabled
+drwxr-xr-x 2 root root  4096 Jul  7 11:33 conf-enabled
+drwxr-xr-x 2 root root  4096 Jul  7 11:33 sites-enabled
+root@continuousintegration:~
+
+16. /var/www/html/   is the configuration file for hosting web application 
+
+17 . 192.168.1.7  if we can go directly in browser  and enter we will get default .
+
+18. git clone "https://github.com/keshavkummari/keshavkummari" under /var/www/html/
+
+    root@continuousintegration:/var/www/html# git clone "https://github.com/keshavkummari/keshavkummari"
+Cloning into 'keshavkummari'...
+remote: Enumerating objects: 153, done.
+remote: Total 153 (delta 0), reused 0 (delta 0), pack-reused 153
+Receiving objects: 100% (153/153), 4.33 MiB | 2.70 MiB/s, done.
+Resolving deltas: 100% (26/26), done.
+root@continuousintegration:/var/www/html# ls
+keshavkummari
+root@continuousintegration:/var/www/html#
+
+19. root@continuousintegration:/var/www/html# cd keshavkummari/
+root@continuousintegration:/var/www/html/keshavkummari# ls
+a.txt  css  favicon.ico  favicon.ico_01.ico  fonts  images  inc  index.html  index.html_bkp  js  README.md  readme.txt
+root@continuousintegration:/var/www/html/keshavkummari# mv * ../
+root@continuousintegration:/var/www/html/keshavkummari# ls
+root@continuousintegration:/var/www/html/keshavkummari# cd ..
+root@continuousintegration:/var/www/html# ls
+a.txt  css  favicon.ico  favicon.ico_01.ico  fonts  images  inc  index.html  index.html_bkp  js  keshavkummari  README.md  readme.txt
+root@continuousintegration:/var/www/html# 
+
+20. if we check http://192.168.1.7 in browser new code will apply 
+
+Note: if we want to deploy new web application code need to go /var/www/html/ (document_root) and remove index.html and moved everything into 
+      document folder then clone new code like above
+
+
+
+
+
+
+Centos7:
+1. yum update -y
+     Loaded plugins: fastestmirror, langpacks
+     Loading mirror speeds from cached hostfile
+     * base: mirrors.piconets.webwerks.in
+     * extras: mirrors.piconets.webwerks.in
+     * updates: mirrors.piconets.webwerks.in
+2. yum insatll http* -y (works only on centos ,redhat and AWS)(name of webserver)
+
+3. systemctl status httpd.service
+
+4. systemctl enable httpd.service  (enable daemon in boot level)
+
+5. systemctl start httpd
+
+6. systemctl status httpd.service or ps -aux(verification if service running or not)
+
+7. grep -i "apache" /etc/passwd /etc/gshadow  (user configuration files)  (here apache user name)
+
+8. grep -i "apache" /etc/group /etc/gshadow  (group configuration files)
+
+9. ls -ltr /etc/httpd /var/www/html/     (will create automatically when we install httpd daemon)
+
+10. Install git if its not exist using command like yum install git
+
+11. git clone "https://github.com/keshavkummari/codewithckk.git" under document root (/var/www/html/) to deploy new code as per developer request
+
+12. mv code under document root (mv * ../)
+
+13. sudo firewall-cmd --permanent --add-service=http 
+14.sudo firewall-cmd --permanent --add-service=https

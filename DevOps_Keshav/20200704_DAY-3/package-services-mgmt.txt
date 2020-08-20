@@ -1,0 +1,250 @@
+Ubuntu :
+
+Package Mgmt : 
+apt
+or
+apt-get 
+
+apt-get install apache2 
+
+
+Services /Deamons Mgmt :
+
+service service_name action 
+
+service apache2 status 
+
+systemctl action service_name
+
+systemctl status apache2 
+
+Init Scripts :
+
+/etc/init.d/apache2 
+
+
+User : apache2 
+Group : apache2 
+
+ls -lrt /etc/apache2
+
+ls -lrt /var/www/
+
+CentOS :
+
+Package Mgmt : 
+
+yum 
+or 
+rpm 
+
+Services /Deamons Mgmt :
+
+service service_name action 
+
+systemctl action service_name
+
+
+root@continuousintegration:/home/cloudbinary# service apache2 status
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: active (running) since Sat 2020-07-04 03:34:51 UTC; 1min 53s ago
+ Main PID: 4547 (apache2)
+    Tasks: 55 (limit: 1103)
+   CGroup: /system.slice/apache2.service
+           ├─4547 /usr/sbin/apache2 -k start
+           ├─4549 /usr/sbin/apache2 -k start
+           └─4550 /usr/sbin/apache2 -k start
+
+Jul 04 03:34:51 continuousintegration systemd[1]: Starting The Apache HTTP Server...
+Jul 04 03:34:51 continuousintegration apachectl[4536]: AH00558: apache2: Could not reliably determine the server's fully qualif
+Jul 04 03:34:51 continuousintegration systemd[1]: Started The Apache HTTP Server.
+root@continuousintegration:/home/cloudbinary# 
+root@continuousintegration:/home/cloudbinary# 
+root@continuousintegration:/home/cloudbinary# systemctl status apache2
+● apache2.service - The Apache HTTP Server
+   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+  Drop-In: /lib/systemd/system/apache2.service.d
+           └─apache2-systemd.conf
+   Active: active (running) since Sat 2020-07-04 03:34:51 UTC; 2min 8s ago
+ Main PID: 4547 (apache2)
+    Tasks: 55 (limit: 1103)
+   CGroup: /system.slice/apache2.service
+           ├─4547 /usr/sbin/apache2 -k start
+           ├─4549 /usr/sbin/apache2 -k start
+           └─4550 /usr/sbin/apache2 -k start
+
+Jul 04 03:34:51 continuousintegration systemd[1]: Starting The Apache HTTP Server...
+Jul 04 03:34:51 continuousintegration apachectl[4536]: AH00558: apache2: Could not reliably determine the server's fully qualif
+Jul 04 03:34:51 continuousintegration systemd[1]: Started The Apache HTTP Server.
+root@continuousintegration:/home/cloudbinary# 
+root@continuousintegration:/home/cloudbinary# # systemctl enable apache2 
+root@continuousintegration:/home/cloudbinary# chkconfig
+chkconfig: command not found
+root@continuousintegration:/home/cloudbinary# # chkconfig apache2 on 
+root@continuousintegration:/home/cloudbinary# 
+root@continuousintegration:/home/cloudbinary# 
+
+
+
+
+root@continuousintegration:/var/www/html# history
+    1  cd
+    2  pwd
+    3  apt-get update
+    4  cat /etc/issue
+    5  apt-get group list
+    6  apt-get install tasksel
+    7  sudo apt-get install slim
+    8  apt-get install lighdm
+    9  apt-get install lightdm
+   10  tasksel 
+   11  runlevel
+   12  init 6
+   13  pwd
+   14  apt-get update
+   15  apt-get install apache2 
+   16  service apache2 status
+   17  systemctl status apache2
+   18  # systemctl enable apache2 
+   19  chkconfig
+   20  # chkconfig apache2 on 
+   21  systemctl status apache2
+   22  pwd
+   23  #ps -aux 
+   24  # p : process
+   25  # s : status
+   26  # a : all
+   27  # u : users
+   28  # x : executions
+   29  top
+   30  ps 
+   31  ps -aux
+   32  ps -aux | grep http
+   33  ps -aux | grep apache
+   34  ps -aux | grep httpd
+   35  ps -aux | grep apache
+   36  systemctl status apache2
+   37  systemctl stop apache2
+   38  systemctl status apache2
+   39  systemctl start apache2
+   40  systemctl status apache2
+   41  ps -aux | grep apache
+   42  /etc/init.d/apache2 
+   43  /etc/init.d/apache2 status
+   44  ls -lrt /etc/init.d/
+   45  cd
+   46  pwd
+   47  systemctl status apache2
+   48  grep apache /etc/passwd /etc/gshadow /etc/group /etc/gshadow
+   49  grep -i 'apache' /etc/passwd /etc/gshadow /etc/group /etc/gshadow
+   50  grep -i 'cloudbinary' /etc/passwd /etc/gshadow /etc/group /etc/gshadow
+   51  ls -lrt /etc/apache2/
+   52  ls -lrt /var/www
+   53  cd /var/www/html/
+   54  ls -lrta
+   55  ifconfig | grep 192.
+   56  ls -lrt
+   57  rm -f index.html 
+   58  pwd
+   59  ls -lrt
+   60  git --version
+   61  git clone https://github.com/keshavkummari/keshavkummari.git
+   62  ls -lrt
+   63  cd keshavkummari/
+   64  ls -lrt
+   65  mv * ../
+   66  ls -lrt
+   67  cd ../
+   68  pwd
+   69  ls -lrt
+   70  history
+root@continuousintegration:/var/www/html# 
+
+
+
+
+CENTOS :
+
+[root@artifactory ~]# cat /etc/redhat-release 
+CentOS Linux release 7.8.2003 (Core)
+[root@artifactory ~]# 
+[root@artifactory ~]# # yum update -y
+[root@artifactory ~]# 
+[root@artifactory ~]# # yum install http*
+[root@artifactory ~]# 
+[root@artifactory ~]# systemctl status httpd.service
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+     Docs: man:httpd(8)
+           man:apachectl(8)
+[root@artifactory ~]# 
+[root@artifactory ~]# 
+[root@artifactory ~]# systemctl enable httpd.service
+Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+[root@artifactory ~]# 
+[root@artifactory ~]# systemctl status httpd.service
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: inactive (dead)
+     Docs: man:httpd(8)
+           man:apachectl(8)
+[root@artifactory ~]# # chkconfig 
+[root@artifactory ~]# 
+[root@artifactory ~]# systemctl start httpd
+[root@artifactory ~]# 
+[root@artifactory ~]# systemctl status httpd.service
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sat 2020-07-04 09:32:38 IST; 3s ago
+     Docs: man:httpd(8)
+           man:apachectl(8)
+ Main PID: 8944 (httpd)
+   Status: "Processing requests..."
+    Tasks: 6
+   CGroup: /system.slice/httpd.service
+           ├─8944 /usr/sbin/httpd -DFOREGROUND
+           ├─8947 /usr/sbin/httpd -DFOREGROUND
+           ├─8948 /usr/sbin/httpd -DFOREGROUND
+           ├─8949 /usr/sbin/httpd -DFOREGROUND
+           ├─8950 /usr/sbin/httpd -DFOREGROUND
+           └─8951 /usr/sbin/httpd -DFOREGROUND
+
+Jul 04 09:32:37 artifactory.codewithckk.com systemd[1]: Starting The Apache HTTP Server...
+Jul 04 09:32:38 artifactory.codewithckk.com systemd[1]: Started The Apache HTTP Server.
+[root@artifactory ~]# 
+[root@artifactory ~]# 
+[root@artifactory ~]# ps -aux | grep http
+root      8944  0.8  0.5 230444  5224 ?        Ss   09:32   0:00 /usr/sbin/httpd -DFOREGROUND
+apache    8947  0.0  0.3 232528  3156 ?        S    09:32   0:00 /usr/sbin/httpd -DFOREGROUND
+apache    8948  0.0  0.3 232528  3156 ?        S    09:32   0:00 /usr/sbin/httpd -DFOREGROUND
+apache    8949  0.0  0.3 232528  3156 ?        S    09:32   0:00 /usr/sbin/httpd -DFOREGROUND
+apache    8950  0.0  0.3 232528  3156 ?        S    09:32   0:00 /usr/sbin/httpd -DFOREGROUND
+apache    8951  0.0  0.3 232528  3156 ?        S    09:32   0:00 /usr/sbin/httpd -DFOREGROUND
+root      8958  0.0  0.0 112780   728 pts/1    R+   09:32   0:00 grep --color=auto http
+[root@artifactory ~]# 
+[root@artifactory ~]# grep -i 'apache' /etc/passwd /etc/gshadow
+/etc/passwd:apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+/etc/gshadow:apache:!::
+[root@artifactory ~]# 
+[root@artifactory ~]# grep -i 'apache' /etc/group /etc/gshadow
+/etc/group:apache:x:48:
+/etc/gshadow:apache:!::
+[root@artifactory ~]# 
+[root@artifactory ~]# ls -lrt /etc/httpd/
+total 0
+lrwxrwxrwx. 1 root root  29 Jul  4 09:30 modules -> ../../usr/lib64/httpd/modules
+lrwxrwxrwx. 1 root root  19 Jul  4 09:30 logs -> ../../var/log/httpd
+drwxr-xr-x. 2 root root 146 Jul  4 09:30 conf.modules.d
+drwxr-xr-x. 2 root root  37 Jul  4 09:30 conf
+lrwxrwxrwx. 1 root root  10 Jul  4 09:30 run -> /run/httpd
+drwxr-xr-x. 2 root root 101 Jul  4 09:30 conf.d
+[root@artifactory ~]# 
+[root@artifactory ~]# ls -lrt /var/www
+total 0
+drwxr-xr-x. 2 root root 6 Apr  2 18:44 html
+drwxr-xr-x. 2 root root 6 Apr  2 18:44 cgi-bin
+
